@@ -20,7 +20,7 @@ This application uses single session. Other session strategies (session managers
 ### Steps to run
 - Download somewhere JBoss EAP (was tested on JBoss EAP 6.1, other versions should work too)
  - Configure there a datasource with JNDI name java:jboss/datasources/jbpmDS
- - You can use any supported database, for example MySQL
+ - You can use any supported database, persistence.xml is preconfigured to use PostgreSQL, but you can change that easily
  - Start the application server
 - cd jbpm-6-examples/rewards-basic
 - mvn clean package
@@ -31,7 +31,7 @@ This application uses single session. Other session strategies (session managers
  - [Mary's Task] is to list Mary's tasks and approve them
 
 
-### TODO: check this issue with version 6
+### TODO: check this issue with version 6:
 - reward-basic.jmx is a jmeter test plan for this application.
  - You may see PermissionDeniedException or OptimisticLockException under load. It means that a user started a task which is already completed. It's expected because this test plan may cause concurrent accesses to the same task with the same user. (It may happen in real use cases)
  

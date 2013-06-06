@@ -45,7 +45,17 @@ public class TaskBean implements TaskLocal {
     
     public List<TaskSummary> retrieveTaskList(String actorId) throws Exception {
 
-        List<TaskSummary> list = taskService.getTasksAssignedAsPotentialOwner(actorId, "en-UK");
+        ut.begin();
+        
+        List<TaskSummary> list;
+        
+        try {
+            list = taskService.getTasksAssignedAsPotentialOwner(actorId, "en-UK");
+            ut.commit();
+        } catch (RollbackException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
 
         System.out.println("retrieveTaskList by " + actorId);
         for (TaskSummary task : list) {
