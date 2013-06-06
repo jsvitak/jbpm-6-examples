@@ -10,7 +10,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <product.version>6.0.0.Beta2</product.version>
+    <product.version>6.0.0.Beta3</product.version>
   </properties>
 
   <dependencies>
@@ -53,7 +53,7 @@
     </dependency>
     <dependency>
       <groupId>org.jbpm</groupId>
-      <artifactId>jbpm-bam</artifactId>
+      <artifactId>jbpm-audit</artifactId>
       <version>${product.version}</version>
     </dependency>
     <dependency>
@@ -63,7 +63,7 @@
     </dependency>
     <dependency>
       <groupId>org.jbpm</groupId>
-      <artifactId>jbpm-human-task-services</artifactId>
+      <artifactId>jbpm-human-task-core</artifactId>
       <version>${product.version}</version>
     </dependency>
     <dependency>
