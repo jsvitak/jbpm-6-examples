@@ -10,7 +10,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <product.version>6.0.0.Beta3</product.version>
+    <product.version>6.0.0.Beta5</product.version>
   </properties>
 
   <dependencies>
