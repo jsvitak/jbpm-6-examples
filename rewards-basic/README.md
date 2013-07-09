@@ -18,13 +18,15 @@ This application uses single session. Other session strategies (session managers
 
 
 ### Steps to run
-- Download somewhere JBoss EAP (was tested on JBoss EAP 6.1, other versions should work too)
- - Configure there a datasource with JNDI name java:jboss/datasources/jbpmDS
- - You can use any supported database, persistence.xml is preconfigured to use PostgreSQL, but you can change that easily
- - Start the application server
-- cd jbpm-6-examples/rewards-basic
-- mvn clean package
-- mvn jboss-as:deploy
+- Make sure you have at least Java 6 and Maven 3 installed
+- Download somewhere JBoss EAP 6.1 (was tested on JBoss EAP 6.1, other versions should work too)
+- Start the application server (default datasource is ExampleDS, the same as in EAP, so the example works out of the box):
+ - cd jboss-eap-6.1/bin
+ - ./standalone.sh
+- Build and deploy the example application:
+ - cd jbpm-6-examples/rewards-basic
+ - mvn clean package
+ - mvn jboss-as:deploy
 - Visit http://localhost:8080/rewards-basic/ with a web browser
  - [Start Reward Process] is to start a new process
  - [John's Task] is to list John's tasks and approve them
