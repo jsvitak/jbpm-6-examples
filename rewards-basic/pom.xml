@@ -109,6 +109,20 @@
         <updatePolicy>daily</updatePolicy>
       </snapshots>
     </repository>
+	<repository>
+	  <id>wso2-public-repository-group</id>
+	  <name>wso2 Public Maven Repository Group</name>
+	  <url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
+	  <layout>default</layout>
+	  <releases>
+	    <enabled>true</enabled>
+	    <updatePolicy>never</updatePolicy>
+	  </releases>
+	  <snapshots>
+	    <enabled>true</enabled>
+	    <updatePolicy>daily</updatePolicy>
+	  </snapshots>
+	</repository>
   </repositories>
 
   <build>
@@ -118,6 +132,15 @@
         <artifactId>jboss-as-maven-plugin</artifactId>
         <version>7.3.Final</version>
       </plugin>
+	  <plugin>
+	    <groupId>org.apache.maven.plugins</groupId>
+	    <artifactId>maven-compiler-plugin</artifactId>
+		<version>3.1</version>
+	    <configuration>
+	      <source>1.6</source>
+	      <target>1.6</target>
+	    </configuration>
+	  </plugin>
     </plugins>
   </build>
 
