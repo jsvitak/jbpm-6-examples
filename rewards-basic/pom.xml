@@ -10,7 +10,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <product.version>6.0.0.Beta5</product.version>
+    <product.version>6.0.0.CR1</product.version>
   </properties>
 
   <dependencies>
@@ -110,6 +110,21 @@
       </snapshots>
     </repository>
   </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+        <updatePolicy>never</updatePolicy>
+      </snapshots>
+      <id>jboss-public-repository</id>
+      <name>JBoss Public</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+    </pluginRepository>
+  </pluginRepositories>
 
   <build>
     <plugins>
