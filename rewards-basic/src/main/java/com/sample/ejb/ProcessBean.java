@@ -19,8 +19,8 @@ package com.sample.ejb;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
@@ -31,10 +31,12 @@ import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.manager.RuntimeEngine;
 import org.kie.api.runtime.manager.RuntimeManager;
 import org.kie.api.runtime.process.ProcessInstance;
+import org.kie.commons.services.cdi.Startup;
 import org.kie.internal.runtime.manager.cdi.qualifier.Singleton;
 import org.kie.internal.runtime.manager.context.EmptyContext;
 
-@Stateless
+@Startup
+@javax.ejb.Singleton
 @TransactionManagement(TransactionManagementType.BEAN)
 public class ProcessBean implements ProcessLocal {
 
@@ -43,26 +45,37 @@ public class ProcessBean implements ProcessLocal {
 
     @Inject
     @Singleton
-    RuntimeManager singletonManager;
-    
+    private RuntimeManager singletonManager;
+
+    @PostConstruct
+    public void configure() {
+        // use toString to make sure CDI initializes the bean
+        // this makes sure that RuntimeManager is started asap,
+        // otherwise after server restart complete task won't move process forward 
+        singletonManager.toString();
+    }
+
     public long startProcess(String recipient) throws Exception {
 
-        RuntimeEngine runtime = singletonManager.getRuntimeEngine(EmptyContext.get());
+        RuntimeEngine runtime = singletonManager.getRuntimeEngine(EmptyContext
+                .get());
         KieSession ksession = runtime.getKieSession();
-        
+
         long processInstanceId = -1;
-        
+
         ut.begin();
 
         try {
             // start a new process instance
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("recipient", recipient);
-            ProcessInstance processInstance = ksession.startProcess("com.sample.rewards-basic", params);
+            ProcessInstance processInstance = ksession.startProcess(
+                    "com.sample.rewards-basic", params);
 
             processInstanceId = processInstance.getId();
 
-            System.out.println("Process started ... : processInstanceId = " + processInstanceId);
+            System.out.println("Process started ... : processInstanceId = "
+                    + processInstanceId);
 
             ut.commit();
         } catch (Exception e) {
@@ -75,5 +88,5 @@ public class ProcessBean implements ProcessLocal {
 
         return processInstanceId;
     }
-    
+
 }
