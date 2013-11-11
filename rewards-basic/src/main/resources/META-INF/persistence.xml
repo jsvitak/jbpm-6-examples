@@ -49,7 +49,7 @@
         <class>org.jbpm.services.task.impl.model.BAMTaskSummaryImpl</class>
     
         <!-- Event Classes -->
-        <class>org.jbpm.services.task.impl.model.TaskEventImpl</class>
+        <class>org.jbpm.services.task.audit.TaskEventImpl</class>
         
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 

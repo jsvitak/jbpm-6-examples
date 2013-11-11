@@ -7,7 +7,6 @@
 http://jboss.org/schema/weld/beans http://jboss.org/schema/weld/beans_1_1.xsd">
     
     <alternatives>
-        <class>org.jbpm.services.task.lifecycle.listeners.JPATaskLifeCycleEventListener</class>
         <!-- class>org.jbpm.shared.services.impl.TestVFSFileServiceImpl</class-->
         <class>com.sample.util.RewardsUserGroupCallback</class>
         <!--class>org.jbpm.kie.services.impl.util.BTMTransactionManagerSynchronizations</class-->
