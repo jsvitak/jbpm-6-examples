@@ -36,8 +36,7 @@ public class ProcessServlet extends HttpServlet {
     private ProcessLocal processService;
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse res)
-            throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         
         String recipient = req.getParameter("recipient");
 
@@ -48,12 +47,10 @@ public class ProcessServlet extends HttpServlet {
             throw new ServletException(e);
         }
 
-        req.setAttribute("message", "process instance (id = "
-                + processInstanceId + ") has been started.");
+        req.setAttribute("message", "process instance (id = " + processInstanceId + ") has been started.");
 
         ServletContext context = this.getServletContext();
-        RequestDispatcher dispatcher = context
-                .getRequestDispatcher("/index.jsp");
+        RequestDispatcher dispatcher = context.getRequestDispatcher("/index.jsp");
         dispatcher.forward(req, res);
     }
 }

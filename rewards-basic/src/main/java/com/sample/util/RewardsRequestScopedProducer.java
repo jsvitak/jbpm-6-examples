@@ -45,7 +45,6 @@ public class RewardsRequestScopedProducer {
 
     @Produces
     public Logger createLogger(InjectionPoint injectionPoint) {
-        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass()
-                .getName());
+        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
     }
 }

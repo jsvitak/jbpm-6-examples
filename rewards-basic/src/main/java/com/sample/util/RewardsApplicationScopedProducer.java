@@ -38,6 +38,7 @@ public class RewardsApplicationScopedProducer {
 
     @Inject
     private InjectableRegisterableItemsFactory factory;
+    
     @Inject
     private UserGroupCallback usergroupCallback;
 
@@ -53,8 +54,7 @@ public class RewardsApplicationScopedProducer {
     @Produces
     public EntityManagerFactory produceEntityManagerFactory() {
         if (this.emf == null) {
-            this.emf = Persistence
-                    .createEntityManagerFactory("com.sample.rewards");
+            this.emf = Persistence.createEntityManagerFactory("com.sample.rewards");
         }
         return this.emf;
     }
@@ -69,10 +69,7 @@ public class RewardsApplicationScopedProducer {
                 .entityManagerFactory(emf)
                 .userGroupCallback(usergroupCallback)
                 .registerableItemsFactory(factory)
-                .addAsset(
-                        ResourceFactory
-                                .newClassPathResource("rewards-basic.bpmn"),
-                        ResourceType.BPMN2).get();
+                .addAsset(ResourceFactory.newClassPathResource("rewards-basic.bpmn"),ResourceType.BPMN2).get();
         return environment;
     }
 
