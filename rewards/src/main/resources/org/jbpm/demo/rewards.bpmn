@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:g="http://www.jboss.org/drools/flow/gpd" xmlns:tns="http://www.jboss.org/drools" xmlns="http://www.jboss.org/drools" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" id="Definition" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.jboss.org/drools" typeLanguage="http://www.java.com/javaTypes">
   <bpmn2:process id="org.jbpm.demo.rewards" tns:version="1" tns:packageName="org.jbpm.demo" tns:adHoc="false" name="Rewards Basic" isExecutable="true" processType="Private">
+    <bpmn2:extensionElements/>
     <bpmn2:startEvent id="StartEvent_1" name="Start">
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
     </bpmn2:startEvent>
@@ -9,21 +10,18 @@
       <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
       <bpmn2:script>long id = kcontext.getProcessInstance().getId();
-System.out.println(&quot;ID &quot; + id);
 String name = (String)kcontext.getVariable(&quot;recipient&quot;);
-String log = &quot;process &quot; + id + &quot; started  by &quot; + name;
+String log = &quot;process &quot; + id + &quot; started by &quot; + name;
 System.out.println(log);</bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="SequenceFlow_6" tns:priority="1" name="" sourceRef="ScriptTask_2" targetRef="UserTask_1"/>
     <bpmn2:userTask id="UserTask_2" name="Approval by HR">
       <bpmn2:extensionElements>
-        <tns:onEntry-script scriptFormat="http://www.java.com/java">
-          <tns:script>System.out.println(&quot;Approval by HR Entry!&quot;);</tns:script>
+        <tns:onEntry-script scriptFormat="http://www.mvel.org/2.0">
+          <tns:script></tns:script>
         </tns:onEntry-script>
-        <tns:onExit-script scriptFormat="http://www.java.com/java">
+        <tns:onExit-script scriptFormat="http://www.mvel.org/2.0">
           <tns:script>long id = kcontext.getProcessInstance().getId();
-System.out.println(&quot;ID &quot; + id);
-String name = (String)kcontext.getVariable(&quot;recipient&quot;);
 String log = &quot;mary approved process &quot; + id;
 System.out.println(log);</tns:script>
         </tns:onExit-script>
@@ -84,12 +82,10 @@ System.out.println(log);</tns:script>
     <bpmn2:userTask id="UserTask_1" name="Approval by PM">
       <bpmn2:extensionElements>
         <tns:onEntry-script scriptFormat="http://www.mvel.org/2.0">
-          <tns:script>System.out.println(&quot;Approval by PM Entry!&quot;);</tns:script>
+          <tns:script></tns:script>
         </tns:onEntry-script>
         <tns:onExit-script scriptFormat="http://www.java.com/java">
           <tns:script>long id = kcontext.getProcessInstance().getId();
-System.out.println(&quot;ID &quot; + id);
-String name = (String)kcontext.getVariable(&quot;recipient&quot;);
 String log = &quot;john approved process &quot; + id;
 System.out.println(log);</tns:script>
         </tns:onExit-script>
@@ -151,8 +147,6 @@ System.out.println(log);</tns:script>
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
       <bpmn2:script>long id = kcontext.getProcessInstance().getId();
-System.out.println(&quot;ID &quot; + id);
-String name = (String)kcontext.getVariable(&quot;recipient&quot;);
 String log = &quot;process &quot; + id + &quot; finished&quot;;
 System.out.println(log);</bpmn2:script>
     </bpmn2:scriptTask>

@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import org.jbpm.demo.rewards.audit.AuditDAO;
 import org.jbpm.test.JBPMHelper;
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;
@@ -17,15 +16,13 @@ import org.kie.api.runtime.manager.RuntimeEngine;
 import org.kie.api.runtime.manager.RuntimeEnvironmentBuilder;
 import org.kie.api.runtime.manager.RuntimeManager;
 import org.kie.api.runtime.manager.RuntimeManagerFactory;
-import org.kie.api.runtime.process.ProcessInstance;
 import org.kie.api.task.TaskService;
 import org.kie.api.task.model.TaskSummary;
 
 public class ProcessMain {
 
 	public static void main(String[] args) {
-		// init cache
-		AuditDAO.Factory.get().ping();
+		
 		
 		KieServices ks = KieServices.Factory.get();
 		KieContainer kContainer = ks.getKieClasspathContainer();
@@ -38,26 +35,22 @@ public class ProcessMain {
 
 		Map<String, Object> params = new HashMap<String, Object>();
         params.put("recipient", "kylin");
-        ProcessInstance processInstance = ksession.startProcess("com.sample.rewards-basic", params);
+        ksession.startProcess("org.jbpm.demo.rewards", params);
         
-        System.out.println("Process started ... : processInstanceId = " + processInstance.getId());
-
 		// let john execute Task 1
 		List<TaskSummary> list = taskService.getTasksAssignedAsPotentialOwner("john", "en-UK");
 		TaskSummary task = list.get(0);
-		System.out.println("John is executing task " + task.getName());
 		taskService.start(task.getId(), "john");
 		taskService.complete(task.getId(), "john", null);
 
 		// let mary execute Task 2
 		list = taskService.getTasksAssignedAsPotentialOwner("mary", "en-UK");
 		task = list.get(0);
-		System.out.println("Mary is executing task " + task.getName());
 		taskService.start(task.getId(), "mary");
 		taskService.complete(task.getId(), "mary", null);
 
 		manager.disposeRuntimeEngine(engine);
-		AuditDAO.Factory.get().destory();
+		
 		System.exit(0);
 	}
 

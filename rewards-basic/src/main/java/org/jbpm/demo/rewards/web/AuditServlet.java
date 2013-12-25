@@ -29,7 +29,7 @@ public class AuditServlet extends HttpServlet {
 		String numStr = req.getParameter("num");
 		try {
 			int num = Integer.parseInt(numStr);
-			if( num > 1 && num * pageSize > AuditDAO.Factory.get().size()) {
+			if( num > 1 && (AuditDAO.Factory.get().size() - (num -1) * pageSize) < 0) {
 				pageNum = num -1;
 			} else if(num <= 0) {
 				pageNum = 1;

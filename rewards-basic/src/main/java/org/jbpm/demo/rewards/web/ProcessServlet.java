@@ -27,7 +27,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jbpm.demo.rewards.audit.AuditDAO;
 import org.jbpm.demo.rewards.ejb.ProcessLocal;
 
 
@@ -53,7 +52,6 @@ public class ProcessServlet extends HttpServlet {
 
         String message =  "Process (id = " + processInstanceId + ") has been started by " + recipient ;
         req.setAttribute("message", message);
-        AuditDAO.Factory.get().addAudit(processInstanceId, message);
         ServletContext context = this.getServletContext();
         RequestDispatcher dispatcher = context.getRequestDispatcher("/index.jsp");
         dispatcher.forward(req, res);
