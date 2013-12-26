@@ -20,7 +20,7 @@ System.out.println(log);</bpmn2:script>
         <tns:onEntry-script scriptFormat="http://www.mvel.org/2.0">
           <tns:script></tns:script>
         </tns:onEntry-script>
-        <tns:onExit-script scriptFormat="http://www.mvel.org/2.0">
+        <tns:onExit-script scriptFormat="http://www.java.com/java">
           <tns:script>long id = kcontext.getProcessInstance().getId();
 String log = &quot;mary approved process &quot; + id;
 System.out.println(log);</tns:script>
@@ -145,15 +145,15 @@ System.out.println(log);</tns:script>
     <bpmn2:sequenceFlow id="SequenceFlow_2" tns:priority="1" sourceRef="UserTask_1" targetRef="UserTask_2"/>
     <bpmn2:scriptTask id="ScriptTask_1" name="End" scriptFormat="http://www.java.com/java">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
       <bpmn2:script>long id = kcontext.getProcessInstance().getId();
 String log = &quot;process &quot; + id + &quot; finished&quot;;
 System.out.println(log);</bpmn2:script>
     </bpmn2:scriptTask>
-    <bpmn2:sequenceFlow id="SequenceFlow_4" tns:priority="1" sourceRef="ScriptTask_1" targetRef="EndEvent_1"/>
-    <bpmn2:endEvent id="EndEvent_1" name="End">
-      <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
-      <bpmn2:terminateEventDefinition id="TerminateEventDefinition_2"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" tns:priority="1" sourceRef="ScriptTask_1" targetRef="EndEvent_2"/>
+    <bpmn2:endEvent id="EndEvent_2" name="End">
+      <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
+      <bpmn2:terminateEventDefinition id="TerminateEventDefinition_1"/>
     </bpmn2:endEvent>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -184,13 +184,6 @@ System.out.println(log);</bpmn2:script>
         <di:waypoint xsi:type="dc:Point" x="510.0" y="116.0"/>
         <di:waypoint xsi:type="dc:Point" x="550.0" y="116.0"/>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="BPMNShape_EndEvent_2" bpmnElement="EndEvent_1">
-        <dc:Bounds height="36.0" width="36.0" x="694.0" y="98.0"/>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_ScriptTask_2" targetElement="BPMNShape_EndEvent_2">
-        <di:waypoint xsi:type="dc:Point" x="660.0" y="116.0"/>
-        <di:waypoint xsi:type="dc:Point" x="694.0" y="116.0"/>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="BPMNShape_ScriptTask_1" bpmnElement="ScriptTask_2">
         <dc:Bounds height="50.0" width="95.0" x="110.0" y="91.0"/>
       </bpmndi:BPMNShape>
@@ -201,6 +194,13 @@ System.out.println(log);</bpmn2:script>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_6" sourceElement="BPMNShape_ScriptTask_1" targetElement="BPMNShape_UserTask_3">
         <di:waypoint xsi:type="dc:Point" x="205.0" y="116.0"/>
         <di:waypoint xsi:type="dc:Point" x="250.0" y="116.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_3" bpmnElement="EndEvent_2">
+        <dc:Bounds height="36.0" width="36.0" x="694.0" y="99.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_ScriptTask_2" targetElement="BPMNShape_EndEvent_3">
+        <di:waypoint xsi:type="dc:Point" x="660.0" y="116.0"/>
+        <di:waypoint xsi:type="dc:Point" x="694.0" y="117.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

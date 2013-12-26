@@ -12,7 +12,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jbpm.version>6.0.0.Final</jbpm.version>
-		<infinispan.version>6.0.0.Final</infinispan.version>
 	</properties>
 
 	<repositories>
@@ -32,12 +31,6 @@
 	</repositories>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.infinispan</groupId>
-			<artifactId>infinispan-core</artifactId>
-			<version>${infinispan.version}</version>
-			<scope>provided</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.jbpm</groupId>
 			<artifactId>jbpm-test</artifactId>
