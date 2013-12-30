@@ -23,7 +23,6 @@ public class ProcessMain {
 
 	public static void main(String[] args) {
 		
-		
 		KieServices ks = KieServices.Factory.get();
 		KieContainer kContainer = ks.getKieClasspathContainer();
 		KieBase kbase = kContainer.getKieBase("kbase");
@@ -58,11 +57,8 @@ public class ProcessMain {
 		JBPMHelper.startH2Server();
 		JBPMHelper.setupDataSource();
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.jbpm.persistence.jpa");
-		RuntimeEnvironmentBuilder builder = RuntimeEnvironmentBuilder.Factory.get()
-			.newDefaultBuilder().entityManagerFactory(emf)
-			.knowledgeBase(kbase);
-		return RuntimeManagerFactory.Factory.get()
-			.newSingletonRuntimeManager(builder.get(), "com.sample:example:1.0");
+		RuntimeEnvironmentBuilder builder = RuntimeEnvironmentBuilder.Factory.get().newDefaultBuilder().entityManagerFactory(emf).knowledgeBase(kbase);
+		return RuntimeManagerFactory.Factory.get().newSingletonRuntimeManager(builder.get(), "com.sample:example:1.0");
 	}
 
 }
