@@ -1,4 +1,4 @@
-package org.jbpm.demo.rewards;
+package org.jbpm.demo.evaluation;
 
 import java.util.HashMap;
 import java.util.List;

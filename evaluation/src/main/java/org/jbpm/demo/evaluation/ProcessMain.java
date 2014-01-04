@@ -1,4 +1,4 @@
-package org.jbpm.demo.rewards;
+package org.jbpm.demo.evaluation;
 
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.jbpm.services.task.identity.JBossUserGroupCallbackImpl;
 import org.jbpm.test.JBPMHelper;
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;
@@ -52,7 +53,6 @@ public class ProcessMain {
 		tasks = taskService.getTasksAssignedAsPotentialOwner("john", "en-UK");
 		task = tasks.get(0);
 		System.out.println("'john' completing task " + task.getName() + ": " + task.getDescription());
-		taskService.claim(task.getId(), "john");
 		taskService.start(task.getId(), "john");
 		results = new HashMap<String, Object>();
 		results.put("performance", "acceptable");
@@ -62,7 +62,6 @@ public class ProcessMain {
 		tasks = taskService.getTasksAssignedAsPotentialOwner("mary", "en-UK");
 		task = tasks.get(0);
 		System.out.println("'mary' completing task " + task.getName() + ": " + task.getDescription());
-		taskService.claim(task.getId(), "mary");
 		taskService.start(task.getId(), "mary");
 		results = new HashMap<String, Object>();
 		results.put("performance", "outstanding");
@@ -80,8 +79,8 @@ public class ProcessMain {
 		JBPMHelper.startH2Server();
 		JBPMHelper.setupDataSource();
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.jbpm.persistence.jpa");
-		RuntimeEnvironmentBuilder builder = RuntimeEnvironmentBuilder.Factory.get().newDefaultBuilder().entityManagerFactory(emf).knowledgeBase(kbase);
-		return RuntimeManagerFactory.Factory.get().newSingletonRuntimeManager(builder.get(), "com.sample:example:1.0");
+		RuntimeEnvironmentBuilder builder = RuntimeEnvironmentBuilder.Factory.get().newDefaultBuilder().entityManagerFactory(emf).userGroupCallback(new JBossUserGroupCallbackImpl("classpath:/usergroups.properties")).knowledgeBase(kbase);
+		return RuntimeManagerFactory.Factory.get().newSingletonRuntimeManager(builder.get(), "org.jbpm.demo:evaluation:1.0");
 	}
 
 }

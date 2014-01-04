@@ -20,6 +20,14 @@
       <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
     </bpmn2:startEvent>
     <bpmn2:userTask id="_2" name="Self Evaluation">
+      <bpmn2:extensionElements>
+        <tns:onEntry-script scriptFormat="http://www.java.com/java">
+          <tns:script></tns:script>
+        </tns:onEntry-script>
+        <tns:onExit-script scriptFormat="http://www.java.com/java">
+          <tns:script></tns:script>
+        </tns:onExit-script>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
       <bpmn2:ioSpecification id="InputOutputSpecification_1">
@@ -73,64 +81,15 @@
         </bpmn2:resourceAssignmentExpression>
       </bpmn2:potentialOwner>
     </bpmn2:userTask>
-    <bpmn2:userTask id="_3" name="PM Evaluation">
-      <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
-      <bpmn2:ioSpecification id="InputOutputSpecification_2">
-        <bpmn2:dataInput id="_3_reasonInput" name="reason"/>
-        <bpmn2:dataInput id="_3_performanceInput" name="performance"/>
-        <bpmn2:dataInput id="_3_CommentInput" name="Comment"/>
-        <bpmn2:dataInput id="_3_SkippableInput" name="Skippable"/>
-        <bpmn2:dataInput id="_3_TaskNameInput" name="TaskName"/>
-        <bpmn2:dataInput id="_3_GroupIdInput" name="GroupId"/>
-        <bpmn2:inputSet id="InputSet_2">
-          <bpmn2:dataInputRefs>_3_reasonInput</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>_3_performanceInput</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>_3_CommentInput</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>_3_SkippableInput</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>_3_TaskNameInput</bpmn2:dataInputRefs>
-          <bpmn2:dataInputRefs>_3_GroupIdInput</bpmn2:dataInputRefs>
-        </bpmn2:inputSet>
-        <bpmn2:outputSet id="OutputSet_2"/>
-      </bpmn2:ioSpecification>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_5">
-        <bpmn2:sourceRef>reason</bpmn2:sourceRef>
-        <bpmn2:targetRef>_3_reasonInput</bpmn2:targetRef>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_6">
-        <bpmn2:sourceRef>performance</bpmn2:sourceRef>
-        <bpmn2:targetRef>_3_performanceInput</bpmn2:targetRef>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_7">
-        <bpmn2:targetRef>_3_CommentInput</bpmn2:targetRef>
-        <bpmn2:assignment id="Assignment_4">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_8">You need to evaluate #{employee}.</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_9">_3_CommentInput</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_8">
-        <bpmn2:targetRef>_3_SkippableInput</bpmn2:targetRef>
-        <bpmn2:assignment id="Assignment_5">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_10">false</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_11">_3_SkippableInput</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_9">
-        <bpmn2:targetRef>_3_TaskNameInput</bpmn2:targetRef>
-        <bpmn2:assignment id="Assignment_6">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_12">Performance Evaluation</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_13">_3_TaskNameInput</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
-      <bpmn2:dataInputAssociation id="DataInputAssociation_10">
-        <bpmn2:targetRef>_3_GroupIdInput</bpmn2:targetRef>
-        <bpmn2:assignment id="Assignment_7">
-          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_14">PM</bpmn2:from>
-          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_15">_3_GroupIdInput</bpmn2:to>
-        </bpmn2:assignment>
-      </bpmn2:dataInputAssociation>
-    </bpmn2:userTask>
-    <bpmn2:userTask id="_4" name="HR Evaluation">
+    <bpmn2:userTask id="_4" name="HR Manager Evaluation">
+      <bpmn2:extensionElements>
+        <tns:onEntry-script scriptFormat="http://www.java.com/java">
+          <tns:script></tns:script>
+        </tns:onEntry-script>
+        <tns:onExit-script scriptFormat="http://www.java.com/java">
+          <tns:script></tns:script>
+        </tns:onExit-script>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
       <bpmn2:ioSpecification id="InputOutputSpecification_3">
@@ -140,6 +99,7 @@
         <bpmn2:dataInput id="_4_SkippableInput" name="Skippable"/>
         <bpmn2:dataInput id="_4_TaskNameInput" name="TaskName"/>
         <bpmn2:dataInput id="_4_GroupIdInput" name="GroupId"/>
+        <bpmn2:dataOutput id="DataOutput_1" itemSubjectRef="_4-performanceItem" name="performance"/>
         <bpmn2:inputSet id="InputSet_3">
           <bpmn2:dataInputRefs>_4_reasonInput</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_4_performanceInput</bpmn2:dataInputRefs>
@@ -148,7 +108,9 @@
           <bpmn2:dataInputRefs>_4_TaskNameInput</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>_4_GroupIdInput</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
-        <bpmn2:outputSet id="OutputSet_3"/>
+        <bpmn2:outputSet id="OutputSet_3">
+          <bpmn2:dataOutputRefs>DataOutput_1</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
       </bpmn2:ioSpecification>
       <bpmn2:dataInputAssociation id="DataInputAssociation_11">
         <bpmn2:sourceRef>reason</bpmn2:sourceRef>
@@ -186,28 +148,104 @@
           <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_24">_4_GroupIdInput</bpmn2:to>
         </bpmn2:assignment>
       </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="DataOutputAssociation_2">
+        <bpmn2:sourceRef>DataOutput_1</bpmn2:sourceRef>
+        <bpmn2:targetRef>performance</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
     </bpmn2:userTask>
     <bpmn2:parallelGateway id="_5" name=" " gatewayDirection="Diverging">
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
       <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
     </bpmn2:parallelGateway>
-    <bpmn2:parallelGateway id="_6" name=" " gatewayDirection="Converging">
-      <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
-      <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
-      <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
-    </bpmn2:parallelGateway>
-    <bpmn2:endEvent id="_7" name=" ">
-      <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
-      <bpmn2:terminateEventDefinition id="TerminateEventDefinition_1"/>
-    </bpmn2:endEvent>
     <bpmn2:sequenceFlow id="SequenceFlow_1" tns:priority="1" name="" sourceRef="_1" targetRef="_2"/>
     <bpmn2:sequenceFlow id="SequenceFlow_2" tns:priority="1" name="" sourceRef="_2" targetRef="_5"/>
     <bpmn2:sequenceFlow id="SequenceFlow_3" tns:priority="1" name="" sourceRef="_5" targetRef="_4"/>
     <bpmn2:sequenceFlow id="SequenceFlow_4" tns:priority="1" name="" sourceRef="_5" targetRef="_3"/>
     <bpmn2:sequenceFlow id="SequenceFlow_5" tns:priority="1" name="" sourceRef="_4" targetRef="_6"/>
-    <bpmn2:sequenceFlow id="SequenceFlow_6" tns:priority="1" name="" sourceRef="_3" targetRef="_6"/>
+    <bpmn2:endEvent id="_7" name=" ">
+      <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
+      <bpmn2:terminateEventDefinition id="TerminateEventDefinition_1"/>
+    </bpmn2:endEvent>
+    <bpmn2:parallelGateway id="_6" name=" " gatewayDirection="Converging">
+      <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
+      <bpmn2:incoming>SequenceFlow_6</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
+    </bpmn2:parallelGateway>
     <bpmn2:sequenceFlow id="SequenceFlow_7" tns:priority="1" name="" sourceRef="_6" targetRef="_7"/>
+    <bpmn2:userTask id="_3" name="Project Manager Evaluation">
+      <bpmn2:extensionElements>
+        <tns:onEntry-script scriptFormat="http://www.java.com/java">
+          <tns:script></tns:script>
+        </tns:onEntry-script>
+        <tns:onExit-script scriptFormat="http://www.java.com/java">
+          <tns:script></tns:script>
+        </tns:onExit-script>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_6</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="InputOutputSpecification_2">
+        <bpmn2:dataInput id="_3_reasonInput" name="reason"/>
+        <bpmn2:dataInput id="_3_performanceInput" name="performance"/>
+        <bpmn2:dataInput id="_3_CommentInput" name="Comment"/>
+        <bpmn2:dataInput id="_3_SkippableInput" name="Skippable"/>
+        <bpmn2:dataInput id="_3_TaskNameInput" name="TaskName"/>
+        <bpmn2:dataInput id="_3_GroupIdInput" name="GroupId"/>
+        <bpmn2:dataOutput id="DataOutput_2" itemSubjectRef="_4-performanceItem" name="performance"/>
+        <bpmn2:inputSet id="InputSet_2">
+          <bpmn2:dataInputRefs>_3_reasonInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_3_performanceInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_3_CommentInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_3_SkippableInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_3_TaskNameInput</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>_3_GroupIdInput</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="OutputSet_2">
+          <bpmn2:dataOutputRefs>DataOutput_2</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_5">
+        <bpmn2:sourceRef>reason</bpmn2:sourceRef>
+        <bpmn2:targetRef>_3_reasonInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_6">
+        <bpmn2:sourceRef>performance</bpmn2:sourceRef>
+        <bpmn2:targetRef>_3_performanceInput</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_7">
+        <bpmn2:targetRef>_3_CommentInput</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_4">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_8">You need to evaluate #{employee}.</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_9">_3_CommentInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_8">
+        <bpmn2:targetRef>_3_SkippableInput</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_5">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_10">false</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_11">_3_SkippableInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_9">
+        <bpmn2:targetRef>_3_TaskNameInput</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_6">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_12">Performance Evaluation</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_13">_3_TaskNameInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_10">
+        <bpmn2:targetRef>_3_GroupIdInput</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_7">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_14">PM</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_15">_3_GroupIdInput</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="DataOutputAssociation_3">
+        <bpmn2:sourceRef>DataOutput_2</bpmn2:sourceRef>
+        <bpmn2:targetRef>performance</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_6" tns:priority="1" name="" sourceRef="_3" targetRef="_6"/>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_Process_1" bpmnElement="org.jbpm.demo.evaluation">
@@ -218,19 +256,19 @@
         <dc:Bounds height="48.0" width="135.0" x="96.0" y="56.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_UserTask_2" bpmnElement="_3">
-        <dc:Bounds height="48.0" width="136.0" x="344.0" y="106.0"/>
+        <dc:Bounds height="48.0" width="169.0" x="344.0" y="106.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_UserTask_3" bpmnElement="_4">
-        <dc:Bounds height="48.0" width="136.0" x="344.0" y="9.0"/>
+        <dc:Bounds height="48.0" width="169.0" x="344.0" y="9.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_ParallelGateway_1" bpmnElement="_5">
         <dc:Bounds height="48.0" width="48.0" x="263.0" y="56.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_ParallelGateway_2" bpmnElement="_6">
-        <dc:Bounds height="48.0" width="48.0" x="512.0" y="56.0"/>
+        <dc:Bounds height="48.0" width="48.0" x="542.0" y="58.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="_7">
-        <dc:Bounds height="36.0" width="36.0" x="582.0" y="63.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="640.0" y="62.0"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_UserTask_1">
         <di:waypoint xsi:type="dc:Point" x="66.0" y="80.0"/>
@@ -251,18 +289,20 @@
         <di:waypoint xsi:type="dc:Point" x="344.0" y="130.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_12" bpmnElement="SequenceFlow_5" sourceElement="BPMNShape_UserTask_3" targetElement="BPMNShape_ParallelGateway_2">
-        <di:waypoint xsi:type="dc:Point" x="480.0" y="33.0"/>
+        <di:waypoint xsi:type="dc:Point" x="513.0" y="33.0"/>
         <di:waypoint xsi:type="dc:Point" x="536.0" y="33.0"/>
-        <di:waypoint xsi:type="dc:Point" x="536.0" y="56.0"/>
+        <di:waypoint xsi:type="dc:Point" x="566.0" y="33.0"/>
+        <di:waypoint xsi:type="dc:Point" x="566.0" y="58.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_13" bpmnElement="SequenceFlow_6" sourceElement="BPMNShape_UserTask_2" targetElement="BPMNShape_ParallelGateway_2">
-        <di:waypoint xsi:type="dc:Point" x="480.0" y="130.0"/>
+        <di:waypoint xsi:type="dc:Point" x="513.0" y="130.0"/>
         <di:waypoint xsi:type="dc:Point" x="536.0" y="129.0"/>
-        <di:waypoint xsi:type="dc:Point" x="536.0" y="105.0"/>
+        <di:waypoint xsi:type="dc:Point" x="566.0" y="129.0"/>
+        <di:waypoint xsi:type="dc:Point" x="566.0" y="107.0"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_14" bpmnElement="SequenceFlow_7" sourceElement="BPMNShape_ParallelGateway_2" targetElement="BPMNShape_EndEvent_1">
-        <di:waypoint xsi:type="dc:Point" x="561.0" y="80.0"/>
-        <di:waypoint xsi:type="dc:Point" x="582.0" y="80.0"/>
+        <di:waypoint xsi:type="dc:Point" x="591.0" y="82.0"/>
+        <di:waypoint xsi:type="dc:Point" x="640.0" y="80.0"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

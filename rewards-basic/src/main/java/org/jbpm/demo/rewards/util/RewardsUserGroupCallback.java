@@ -34,8 +34,7 @@ public class RewardsUserGroupCallback implements UserGroupCallback {
         return groupId.equals("PM") || groupId.equals("HR");
     }
 
-    public List<String> getGroupsForUser(String userId,
-            List<String> groupIds, List<String> allExistingGroupIds) {
+    public List<String> getGroupsForUser(String userId, List<String> groupIds, List<String> allExistingGroupIds) {
         List<String> groups = new ArrayList<String>();
         if (userId.equals("john"))
             groups.add("PM");
