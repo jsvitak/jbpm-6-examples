@@ -1,0 +1,13 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+        <p>Welcome to rewards-ee6 example!</p>
+        <ul>
+            <li><h:link outcome="startProcess.xhtml">Start a business process</h:link></li>
+            <li><h:link outcome="listTasks.xhtml?user=john">John's tasks</h:link></li>
+            <li><h:link outcome="listTasks.xhtml?user=mary">Mary's tasks</h:link></li>
+        </ul>
+    </ui:define>
+</ui:composition>

@@ -7,11 +7,11 @@
 
 	<servlet>
 		<servlet-name>ProcessServlet</servlet-name>
-		<servlet-class>com.sample.web.ProcessServlet</servlet-class>
+		<servlet-class>org.jbpm.examples.web.ProcessServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>TaskServlet</servlet-name>
-		<servlet-class>com.sample.web.TaskServlet</servlet-class>
+		<servlet-class>org.jbpm.examples.web.TaskServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>

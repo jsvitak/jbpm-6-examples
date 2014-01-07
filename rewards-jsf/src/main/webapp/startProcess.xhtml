@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/templates/default.xhtml">
+
+    <ui:param name="pageTitle" value="Start a rewards process" />
+
+    <ui:define name="content">
+        <h:form>
+            <h:outputLabel value="Select a recipient" for="recipient" />
+            <h:selectOneListbox id="recipient" value="#{processController.recipient}">
+                <f:selectItem itemValue="krisv"/>
+            </h:selectOneListbox>
+            <h:commandButton action="#{processController.startProcess}" value="Submit" />
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+

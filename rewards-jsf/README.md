@@ -1,12 +1,7 @@
-rewards-basic
+rewards-jsf
 =============
 
-This is an example web application for jBPM 6. It was created by forking the rewards-basic application by Toshiya Kobayashi:
-https://github.com/tkobayas/jbpm5example/tree/master/rewards-basic
-
-Also the project structure has changed from Java EE 5 to Java EE 6.
-
-This simple example aims to provide an example usage of:
+This simple JSF 2.1 example aims to provide an example usage of:
 - Human tasks
 - Persistence
 - Transactions
@@ -21,12 +16,11 @@ This simple example aims to provide an example usage of:
  - cd jboss-eap-6.1/bin
  - ./standalone.sh
 - Build and deploy the example application:
- - cd jbpm-6-examples/rewards-basic
+ - cd jbpm-6-examples/rewards-jsf
  - mvn clean package
  - mvn jboss-as:deploy
-- Visit http://localhost:8080/rewards-basic/ with a web browser
+- Visit http://localhost:8080/rewards-jsf/ with a web browser
  - [Start Reward Process] is to start a new process
- - [John's Task] is to list John's tasks and approve them
- - [Mary's Task] is to list Mary's tasks and approve them
-
+ - [John's Task] is to list John's tasks and later approve them
+ - [Mary's Task] is to list Mary's tasks and later approve them
 
