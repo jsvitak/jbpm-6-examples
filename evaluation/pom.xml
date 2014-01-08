@@ -6,8 +6,8 @@
 	<artifactId>jbpm-demo-evaluation</artifactId>
 	<version>6.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>jBPM 6 Demo Evaluation</name>
-	<description>jBPM 6 Demo Evaluation</description>
+	<name>jBPM 6 Demo evaluation</name>
+	<description>jBPM 6 Demo evaluation</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

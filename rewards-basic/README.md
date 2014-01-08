@@ -12,6 +12,7 @@ This simple example aims to provide an example usage of:
 - Transactions
 - Singleton session manager
 - Context dependency injection
+- Infinispan
 - Maven
 
 This application uses single session. Other session strategies (session managers) can be demonstrated later. So far the example supports only dependencies from jBPM 6 as community project.

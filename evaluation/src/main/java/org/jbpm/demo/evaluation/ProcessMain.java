@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import org.jbpm.services.task.identity.JBossUserGroupCallbackImpl;
+import org.jbpm.services.task.utils.ContentMarshallerHelper;
 import org.jbpm.test.JBPMHelper;
 import org.kie.api.KieBase;
 import org.kie.api.KieServices;
@@ -18,10 +19,14 @@ import org.kie.api.runtime.manager.RuntimeEnvironmentBuilder;
 import org.kie.api.runtime.manager.RuntimeManager;
 import org.kie.api.runtime.manager.RuntimeManagerFactory;
 import org.kie.api.task.TaskService;
+import org.kie.api.task.model.Content;
+import org.kie.api.task.model.Task;
+import org.kie.api.task.model.TaskData;
 import org.kie.api.task.model.TaskSummary;
 
 public class ProcessMain {
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		
 		KieServices ks = KieServices.Factory.get();
@@ -45,6 +50,12 @@ public class ProcessMain {
 		TaskSummary task = tasks.get(0);
 		System.out.println("'krisv' completing task " + task.getName() + ": " + task.getDescription());
 		taskService.start(task.getId(), "krisv");
+		Task userTask = taskService.getTaskById(task.getId());
+		TaskData taskData = userTask.getTaskData();
+		Content content = taskService.getContentById(taskData.getDocumentContentId());
+		Map<String, Object> map =  (Map<String, Object>) ContentMarshallerHelper.unmarshall(content.getContent(), null);
+		System.out.println("Self Evaluation Input:");
+		System.out.println("  reason -> " + map.get("reason"));
 		Map<String, Object> results = new HashMap<String, Object>();
 		results.put("performance", "exceeding");
 		taskService.complete(task.getId(), "krisv", results);
@@ -54,6 +65,13 @@ public class ProcessMain {
 		task = tasks.get(0);
 		System.out.println("'john' completing task " + task.getName() + ": " + task.getDescription());
 		taskService.start(task.getId(), "john");
+		userTask = taskService.getTaskById(task.getId());
+		taskData = userTask.getTaskData();
+		content = taskService.getContentById(taskData.getDocumentContentId());
+		map =  (Map<String, Object>) ContentMarshallerHelper.unmarshall(content.getContent(), null);
+		System.out.println("HR Manager Evaluation Input:");
+		System.out.println("  reason -> " + map.get("reason"));
+		System.out.println("  performance -> " + map.get("performance"));
 		results = new HashMap<String, Object>();
 		results.put("performance", "acceptable");
 		taskService.complete(task.getId(), "john", results);
@@ -63,6 +81,13 @@ public class ProcessMain {
 		task = tasks.get(0);
 		System.out.println("'mary' completing task " + task.getName() + ": " + task.getDescription());
 		taskService.start(task.getId(), "mary");
+		userTask = taskService.getTaskById(task.getId());
+		taskData = userTask.getTaskData();
+		content = taskService.getContentById(taskData.getDocumentContentId());
+		map =  (Map<String, Object>) ContentMarshallerHelper.unmarshall(content.getContent(), null);
+		System.out.println("PM Manager Evaluation Input:");
+		System.out.println("  reason -> " + map.get("reason"));
+		System.out.println("  performance -> " + map.get("performance"));
 		results = new HashMap<String, Object>();
 		results.put("performance", "outstanding");
 		taskService.complete(task.getId(), "mary", results);
