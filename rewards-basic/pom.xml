@@ -6,7 +6,7 @@
   <parent>
     <groupId>org.jbpm.examples</groupId>
     <artifactId>jbpm-web-examples</artifactId>
-    <version>6.0.0-SNAPSHOT</version>
+    <version>6.0.1-SNAPSHOT</version>
   </parent>
 
   <artifactId>rewards-basic</artifactId>
@@ -81,6 +81,10 @@
     <dependency>
       <groupId>org.jbpm</groupId>
       <artifactId>jbpm-human-task-audit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jbpm</groupId>
+      <artifactId>jbpm-kie-services</artifactId>
     </dependency>
     <dependency>
       <groupId>org.jbpm</groupId>

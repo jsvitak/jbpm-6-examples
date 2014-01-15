@@ -38,17 +38,12 @@ public class RewardsApplicationScopedProducer {
 
     @Inject
     private InjectableRegisterableItemsFactory factory;
+
     @Inject
     private UserGroupCallback usergroupCallback;
 
     @PersistenceUnit(unitName = "com.sample.rewards")
     private EntityManagerFactory emf;
-
-
-    @Produces
-    public UserGroupCallback produceUserGroupCallback() {
-        return usergroupCallback;
-    }
 
     @Produces
     public EntityManagerFactory produceEntityManagerFactory() {

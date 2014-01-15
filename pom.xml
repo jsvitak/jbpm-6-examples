@@ -4,13 +4,13 @@
 
   <groupId>org.jbpm.examples</groupId>
   <artifactId>jbpm-web-examples</artifactId>
-  <version>6.0.0-SNAPSHOT</version>
+  <version>6.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>jbpm-web-examples</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jbpm.version>6.0.0.Final</jbpm.version>
+    <jbpm.version>6.0.1.Final</jbpm.version>
   </properties>
   
   <modules>
