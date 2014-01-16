@@ -18,9 +18,7 @@ package org.jbpm.examples.web;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
 import javax.faces.context.FacesContext;
-import java.util.logging.Logger;
 
 public class WebUtil {
 
@@ -28,11 +26,6 @@ public class WebUtil {
     @RequestScoped
     public FacesContext produceFacesContext() {
         return FacesContext.getCurrentInstance();
-    }
-
-    @Produces
-    public Logger produceLog(InjectionPoint injectionPoint) {
-        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
     }
 
 }

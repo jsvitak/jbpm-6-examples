@@ -16,7 +16,6 @@
 
 package org.jbpm.examples.web;
 
-import com.google.inject.Inject;
 import org.jbpm.examples.ejb.TaskBean;
 import org.kie.api.task.model.Task;
 import org.kie.api.task.model.TaskSummary;
@@ -26,7 +25,10 @@ import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Model
 public class TaskController {
@@ -36,6 +38,9 @@ public class TaskController {
 
     @Inject
     FacesContext facesContext;
+
+    @Inject
+    Logger logger;
 
     private String user;
     private List<TaskSummary> tasks;
@@ -79,8 +84,8 @@ public class TaskController {
         try {
             tasks = taskBean.retrieveTaskList(user);
         } catch (Exception e) {
-            FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot retrieve tasks.", "Fail!");
-            FacesContext.getCurrentInstance().addMessage(null, m);
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot retrieve tasks.", "Fail!");
+            facesContext.addMessage(null, fm);
         }
     }
 
@@ -88,9 +93,10 @@ public class TaskController {
         try {
             task = taskBean.getTask(taskId);
         } catch (Exception e) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Unable to query for task with id = " + taskId, "Fail!");
-            FacesContext.getCurrentInstance().addMessage(null, fm);
-            e.printStackTrace();
+            String message = "Unable to query for task with id = " + taskId;
+            logger.log(Level.SEVERE, message, e);
+            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "Fail!");
+            facesContext.addMessage(null, fm);
         }
     }
 
@@ -98,11 +104,15 @@ public class TaskController {
         FacesMessage fm;
         try {
             taskBean.approveTask(user, taskId);
-            fm = new FacesMessage(FacesMessage.SEVERITY_INFO, "The task has been successfully approved.", "Success :)");
+            String message = "The task with ID " + taskId + " has been successfully approved.";
+            logger.info(message);
+            fm = new FacesMessage(FacesMessage.SEVERITY_INFO, message, "Success :)");
         } catch (Exception e) {
-            fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Unable to approve the task.", "Fail!");
+            String message = "Unable to approve the task with ID " + taskId + ".";
+            logger.log(Level.SEVERE, message, e);
+            fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "Fail!");
         }
-        FacesContext.getCurrentInstance().addMessage(null, fm);
+        facesContext.addMessage(null, fm);
         return "index.xhtml";
     }
 }

@@ -16,24 +16,23 @@
 
 package org.jbpm.examples.ejb;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.transaction.Status;
-import javax.transaction.UserTransaction;
-
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.manager.RuntimeEngine;
 import org.kie.api.runtime.manager.RuntimeManager;
 import org.kie.api.runtime.process.ProcessInstance;
 import org.kie.internal.runtime.manager.cdi.qualifier.Singleton;
 import org.kie.internal.runtime.manager.context.EmptyContext;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
+import javax.inject.Inject;
+import javax.transaction.Status;
+import javax.transaction.UserTransaction;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
 
 @javax.ejb.Startup
 @javax.ejb.Singleton
@@ -46,6 +45,8 @@ public class ProcessBean {
     @Inject
     @Singleton
     private RuntimeManager singletonManager;
+
+    Logger logger = Logger.getLogger("org.jbpm.examples.ejb.ProcessBean");
 
     @PostConstruct
     public void configure() {
@@ -68,15 +69,13 @@ public class ProcessBean {
             ProcessInstance processInstance = ksession.startProcess(
                     "com.sample.rewards-basic", params);
                        processInstanceId = processInstance.getId();
-            System.out.println("Process started ... : processInstanceId = "
-                    + processInstanceId);
             ut.commit();
+            logger.info("Instance of rewards process has been successfully started with ID " + processInstanceId + ".");
         } catch (Exception e) {
-            e.printStackTrace();
             if (ut.getStatus() == Status.STATUS_ACTIVE) {
                 ut.rollback();
             }
-            throw e;
+            throw new RuntimeException(e);
         }
         return processInstanceId;
     }

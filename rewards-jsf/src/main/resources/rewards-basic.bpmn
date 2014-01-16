@@ -154,7 +154,7 @@
       </potentialOwner>
     </userTask>
     <scriptTask id="_6" name="Script" scriptFormat="http://www.java.com/java" >
-      <script>System.out.println("Process has been finished!");</script>
+      <script>System.out.println("ScriptTask: Process has been finished!");</script>
     </scriptTask>
 
     <!-- connections -->

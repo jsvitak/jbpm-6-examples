@@ -16,13 +16,14 @@
 
 package org.jbpm.examples.web;
 
-import com.google.inject.Inject;
 import org.jbpm.examples.ejb.ProcessBean;
 
 import javax.ejb.EJB;
 import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Model
@@ -35,7 +36,7 @@ public class ProcessController {
     FacesContext facesContext;
 
     @Inject
-    Logger log;
+    Logger logger;
 
     private String recipient;
 
@@ -53,17 +54,14 @@ public class ProcessController {
         try {
             long processInstanceId = processBean.startProcess(recipient);
             String message = "Process instance with ID " + processInstanceId + " has been successfully started." ;
-            //log.info(message);
-            System.out.println(message);
+            logger.info(message);
             fm = new FacesMessage(FacesMessage.SEVERITY_INFO, message, "Success!");
         } catch (Exception e) {
             String message = "Unable to start the business process.";
-            System.out.println(message);
-            //log.severe(message);
+            logger.log(Level.SEVERE, message, e);
             fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "Fail!");
         }
-        //facesContext.addMessage(null, fm);
-        FacesContext.getCurrentInstance().addMessage(null, fm);
+        facesContext.addMessage(null, fm);
         return "index.xhtml";
     }
 }

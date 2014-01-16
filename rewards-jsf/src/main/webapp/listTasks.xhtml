@@ -12,14 +12,17 @@
     <ui:param name="pageTitle" value="Human Tasks" />
 
     <ui:define name="content">
-        <h:dataTable id="userTasksTable" border="1"
+        <h:panelGroup rendered="#{empty taskController.tasks}">
+            <em>User #{taskController.user} has no pending tasks.</em>
+        </h:panelGroup>
+        <h:dataTable id="userTasksTable" border="1" rendered="#{not empty taskController.tasks}"
                      value="#{taskController.tasks}" var="_item">
-        <h:column>
-            <f:facet name="header">
-                <h:outputText value="Id" />
-            </f:facet>
-            <h:outputText id="taskName" value="#{_item.id}" />
-        </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Id" />
+                </f:facet>
+                <h:outputText id="taskName" value="#{_item.id}" />
+            </h:column>
             <h:column>
                 <f:facet name="header">
                     <h:outputText value="Name" />
@@ -32,16 +35,16 @@
                 </f:facet>
                 <h:outputText id="processInstanceId" value="#{_item.processInstanceId}" />
             </h:column>
-        <h:column>
-            <f:facet name="header">
-                <h:outputText value="Approval" />
-            </f:facet>
-            <h:link outcome="/approveTask">
-                <f:param name="taskId" value="#{_item.id}" />
-                <f:param name="user" value="#{taskController.user}" />
-                <h:outputText id="approve" value="Approve" />
-            </h:link>
-        </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Approval" />
+                </f:facet>
+                <h:link outcome="/approveTask">
+                    <f:param name="taskId" value="#{_item.id}" />
+                    <f:param name="user" value="#{taskController.user}" />
+                    <h:outputText id="approve" value="Approve" />
+                </h:link>
+            </h:column>
         </h:dataTable>
     </ui:define>
 </ui:composition>
