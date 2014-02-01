@@ -23,15 +23,15 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceUnit;
 
-import org.jbpm.runtime.manager.impl.RuntimeEnvironmentBuilder;
 import org.jbpm.runtime.manager.impl.cdi.InjectableRegisterableItemsFactory;
 import org.kie.api.io.ResourceType;
+import org.kie.api.runtime.manager.RuntimeEnvironment;
+import org.kie.api.runtime.manager.RuntimeEnvironmentBuilder;
+import org.kie.api.task.UserGroupCallback;
 import org.kie.internal.io.ResourceFactory;
-import org.kie.internal.runtime.manager.RuntimeEnvironment;
 import org.kie.internal.runtime.manager.cdi.qualifier.PerProcessInstance;
 import org.kie.internal.runtime.manager.cdi.qualifier.PerRequest;
 import org.kie.internal.runtime.manager.cdi.qualifier.Singleton;
-import org.kie.internal.task.api.UserGroupCallback;
 
 @ApplicationScoped
 public class RewardsApplicationScopedProducer {
@@ -42,14 +42,14 @@ public class RewardsApplicationScopedProducer {
     @Inject
     private UserGroupCallback usergroupCallback;
 
-    @PersistenceUnit(unitName = "com.sample.rewards")
+    @PersistenceUnit(unitName = "org.jbpm.examples.rewards-jsf")
     private EntityManagerFactory emf;
 
     @Produces
     public EntityManagerFactory produceEntityManagerFactory() {
         if (this.emf == null) {
             this.emf = Persistence
-                    .createEntityManagerFactory("com.sample.rewards");
+                    .createEntityManagerFactory("org.jbpm.examples.rewards-jsf");
         }
         return this.emf;
     }
@@ -59,8 +59,8 @@ public class RewardsApplicationScopedProducer {
     @PerProcessInstance
     @PerRequest
     public RuntimeEnvironment produceEnvironment(EntityManagerFactory emf) {
-        RuntimeEnvironment environment = RuntimeEnvironmentBuilder
-                .getDefault()
+        RuntimeEnvironment environment = RuntimeEnvironmentBuilder.Factory.get()
+                .newDefaultBuilder()
                 .entityManagerFactory(emf)
                 .userGroupCallback(usergroupCallback)
                 .registerableItemsFactory(factory)

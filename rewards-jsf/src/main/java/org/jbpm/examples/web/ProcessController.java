@@ -50,7 +50,6 @@ public class ProcessController {
 
     public String startProcess() {
         FacesMessage fm;
-        System.out.println("facesContext: " + facesContext);
         try {
             long processInstanceId = processBean.startProcess(recipient);
             String message = "Process instance with ID " + processInstanceId + " has been successfully started." ;
