@@ -113,6 +113,6 @@ public class TaskController {
             fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "Fail!");
         }
         facesContext.addMessage(null, fm);
-        return "index.xhtml";
+        return "index.xhtml?faces-redirect=true";
     }
 }
