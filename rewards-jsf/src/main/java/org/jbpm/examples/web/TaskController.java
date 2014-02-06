@@ -84,8 +84,10 @@ public class TaskController {
         try {
             tasks = taskBean.retrieveTaskList(user);
         } catch (Exception e) {
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cannot retrieve tasks.", "Fail!");
-            facesContext.addMessage(null, fm);
+            String message = "Cannot retrieve task list.";
+            logger.log(Level.SEVERE, message, e);
+            facesContext.getExternalContext().getFlash()
+                    .put("msg", message);
         }
     }
 
@@ -95,24 +97,23 @@ public class TaskController {
         } catch (Exception e) {
             String message = "Unable to query for task with id = " + taskId;
             logger.log(Level.SEVERE, message, e);
-            FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "Fail!");
-            facesContext.addMessage(null, fm);
+            facesContext.getExternalContext().getFlash()
+                    .put("msg", message);
         }
     }
 
     public String approveTask() {
-        FacesMessage fm;
+        String message;
         try {
             taskBean.approveTask(user, taskId);
-            String message = "The task with ID " + taskId + " has been successfully approved.";
+            message = "The task with ID " + taskId + " has been successfully approved.";
             logger.info(message);
-            fm = new FacesMessage(FacesMessage.SEVERITY_INFO, message, "Success :)");
         } catch (Exception e) {
-            String message = "Unable to approve the task with ID " + taskId + ".";
+            message = "Unable to approve the task with ID " + taskId + ".";
             logger.log(Level.SEVERE, message, e);
-            fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "Fail!");
         }
-        facesContext.addMessage(null, fm);
+        facesContext.getExternalContext().getFlash()
+                .put("msg", message);
         return "index.xhtml?faces-redirect=true";
     }
 }

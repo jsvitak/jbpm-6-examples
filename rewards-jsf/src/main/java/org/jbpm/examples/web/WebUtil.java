@@ -16,16 +16,24 @@
 
 package org.jbpm.examples.web;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 
+@RequestScoped
 public class WebUtil {
 
+    private FacesContext facesContext;
+
+    @PostConstruct
+    private void init() {
+        facesContext = FacesContext.getCurrentInstance();
+    }
+
     @Produces
-    @RequestScoped
     public FacesContext produceFacesContext() {
-        return FacesContext.getCurrentInstance();
+        return facesContext;
     }
 
 }

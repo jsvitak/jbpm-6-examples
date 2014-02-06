@@ -49,18 +49,17 @@ public class ProcessController {
     }
 
     public String startProcess() {
-        FacesMessage fm;
+        String message;
         try {
             long processInstanceId = processBean.startProcess(recipient);
-            String message = "Process instance with ID " + processInstanceId + " has been successfully started." ;
+            message = "Process instance with ID " + processInstanceId + " has been successfully started." ;
             logger.info(message);
-            fm = new FacesMessage(FacesMessage.SEVERITY_INFO, message, "Success!");
         } catch (Exception e) {
-            String message = "Unable to start the business process.";
+            message = "Unable to start the business process.";
             logger.log(Level.SEVERE, message, e);
-            fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, "Fail!");
         }
-        facesContext.addMessage(null, fm);
+        facesContext.getExternalContext().getFlash()
+                .put("msg", message);
         return "index.xhtml?faces-redirect=true";
     }
 }

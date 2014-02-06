@@ -10,7 +10,7 @@
 <h:body>
     <div id="container">
         <div id="bar">
-            <h:messages />
+            <i><h:outputLabel value="#{flash['msg']}" /></i>
         </div>
         <div id="content">
             <ui:insert name="content">

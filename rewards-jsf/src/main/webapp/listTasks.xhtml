@@ -13,7 +13,7 @@
 
     <ui:define name="content">
         <h:panelGroup rendered="#{empty taskController.tasks}">
-            <em>User #{taskController.user} has no pending tasks.</em>
+            <i>User #{taskController.user} has no pending tasks.</i>
         </h:panelGroup>
         <h:dataTable id="userTasksTable" border="1" rendered="#{not empty taskController.tasks}"
                      value="#{taskController.tasks}" var="_item">
