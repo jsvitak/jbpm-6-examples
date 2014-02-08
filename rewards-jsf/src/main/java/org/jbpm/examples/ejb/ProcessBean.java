@@ -32,7 +32,6 @@ import javax.transaction.Status;
 import javax.transaction.UserTransaction;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 @javax.ejb.Startup
 @javax.ejb.Singleton
@@ -46,8 +45,6 @@ public class ProcessBean {
     @Singleton
     private RuntimeManager singletonManager;
 
-    Logger logger = Logger.getLogger("org.jbpm.examples.ejb.ProcessBean");
-
     @PostConstruct
     public void configure() {
         // use toString to make sure CDI initializes the bean
@@ -56,7 +53,7 @@ public class ProcessBean {
         singletonManager.toString();
     }
 
-    public long startProcess(String recipient) throws Exception {
+    public long startProcess(String recipient, int reward) throws Exception {
         RuntimeEngine runtime = singletonManager.getRuntimeEngine(EmptyContext
                 .get());
         KieSession ksession = runtime.getKieSession();
@@ -66,11 +63,11 @@ public class ProcessBean {
             // start a new process instance
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("recipient", recipient);
+            params.put("reward", reward);
             ProcessInstance processInstance = ksession.startProcess(
-                    "com.sample.rewards-basic", params);
+                    "org.jbpm.examples.rewards", params);
                        processInstanceId = processInstance.getId();
             ut.commit();
-            logger.info("Instance of rewards process has been successfully started with ID " + processInstanceId + ".");
         } catch (Exception e) {
             if (ut.getStatus() == Status.STATUS_ACTIVE) {
                 ut.rollback();

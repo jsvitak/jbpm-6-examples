@@ -20,7 +20,6 @@ import org.jbpm.examples.ejb.ProcessBean;
 
 import javax.ejb.EJB;
 import javax.enterprise.inject.Model;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import java.util.logging.Level;
@@ -39,6 +38,7 @@ public class ProcessController {
     Logger logger;
 
     private String recipient;
+    private int reward = 200;
 
     public void setRecipient(String recipient) {
         this.recipient = recipient;
@@ -48,11 +48,19 @@ public class ProcessController {
         return recipient;
     }
 
+    public int getReward() {
+        return reward;
+    }
+
+    public void setReward(int reward) {
+        this.reward = reward;
+    }
+
     public String startProcess() {
         String message;
         try {
-            long processInstanceId = processBean.startProcess(recipient);
-            message = "Process instance with ID " + processInstanceId + " has been successfully started." ;
+            long processInstanceId = processBean.startProcess(recipient, reward);
+            message = "Process instance " + processInstanceId + " has been successfully started." ;
             logger.info(message);
         } catch (Exception e) {
             message = "Unable to start the business process.";

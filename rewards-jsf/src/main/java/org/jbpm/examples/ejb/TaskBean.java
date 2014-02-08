@@ -20,6 +20,7 @@ import org.jbpm.services.task.exception.PermissionDeniedException;
 import org.kie.api.task.TaskService;
 import org.kie.api.task.model.Task;
 import org.kie.api.task.model.TaskSummary;
+import org.kie.internal.task.api.InternalTaskService;
 
 import javax.annotation.Resource;
 import javax.ejb.TransactionManagement;
@@ -29,8 +30,9 @@ import javax.persistence.OptimisticLockException;
 import javax.transaction.RollbackException;
 import javax.transaction.Status;
 import javax.transaction.UserTransaction;
+import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Logger;
+import java.util.Map;
 
 @javax.ejb.Stateless
 @TransactionManagement(TransactionManagementType.BEAN)
@@ -42,9 +44,8 @@ public class TaskBean {
     @Inject
     TaskService taskService;
 
-    @Inject
-    Logger logger;
-    
+    private Map<String,Object> content;
+
     public List<TaskSummary> retrieveTaskList(String actorId) throws Exception {
         ut.begin();
         List<TaskSummary> list;
@@ -52,22 +53,16 @@ public class TaskBean {
             list = taskService.getTasksAssignedAsPotentialOwner(actorId, "en-UK");
             ut.commit();
         } catch (RollbackException e) {
-            e.printStackTrace();
             throw new RuntimeException(e);
-        }
-        logger.info("retrieveTaskList for actor " + actorId + ":");
-        for (TaskSummary task : list) {
-            logger.info(" task.getId() = " + task.getId());
         }
         return list;
     }
 
-    public void approveTask(String actorId, long taskId) throws Exception {
+    public void approveTask(String actorId, long taskId, Map<String,Object> content) throws Exception {
         ut.begin();
         try {
-            logger.info("approveTask (taskId = " + taskId + ") for actor " + actorId);
             taskService.start(taskId, actorId);
-            taskService.complete(taskId, actorId, null);
+            taskService.complete(taskId, actorId, content);
             ut.commit();
         } catch (RollbackException e) {
             Throwable cause = e.getCause();
@@ -98,16 +93,28 @@ public class TaskBean {
         ut.begin();
         Task task;
         try {
-            logger.info("getTask of ID = " + taskId);
             task = taskService.getTaskById(taskId);
+            content = ((InternalTaskService) taskService).getTaskContent(task.getTaskData().getDocumentContentId());
             ut.commit();
         } catch (Exception e) {
-            if (ut.getStatus() == Status.STATUS_ACTIVE) {
-                ut.rollback();
-            }
-            throw new ProcessOperationException("Cannot get task with id = " + taskId, e);
+            ut.rollback();
+            throw new ProcessOperationException("Cannot get task " + taskId, e);
         }
         return task;
     }
+
+    public Map<String,Object> getContent() {
+        return content;
+    }
+
+//    public Map<String,Object> getContent(long contentId) throws Exception {
+//        Map<String,Object> content;
+//        try {
+//            content =
+//        } catch (Exception e) {
+//            throw new ProcessOperationException("Cannot get task content " + contentId, e);
+//        }
+//        return content;
+//    }
 
 }

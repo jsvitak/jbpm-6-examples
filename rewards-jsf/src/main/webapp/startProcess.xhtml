@@ -8,11 +8,17 @@
 
     <ui:define name="content">
         <h:form>
-            <h:outputLabel value="Select a recipient" for="recipient" />
-            <h:selectOneListbox id="recipient" value="#{processController.recipient}">
-                <f:selectItem itemValue="krisv"/>
-            </h:selectOneListbox>
-            <h:commandButton action="#{processController.startProcess}" value="Submit" />
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Select a recipient" for="recipient" />
+                <h:selectOneMenu id="recipient" value="#{processController.recipient}">
+                    <f:selectItem itemValue="tom"/>
+                    <f:selectItem itemValue="jerry"/>
+                </h:selectOneMenu>
+                <h:outputLabel value="Reward amount" for="reward" />
+                <h:inputText id="reward" value="#{processController.reward}" />
+                <h:outputLabel />
+                <h:commandButton action="#{processController.startProcess}" value="Submit" />
+            </h:panelGrid>
         </h:form>
     </ui:define>
 </ui:composition>

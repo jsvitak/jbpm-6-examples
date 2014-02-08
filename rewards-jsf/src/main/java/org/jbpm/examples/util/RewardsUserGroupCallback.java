@@ -16,12 +16,11 @@
 
 package org.jbpm.examples.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.kie.api.task.UserGroupCallback;
 
 import javax.enterprise.inject.Alternative;
-
-import org.kie.api.task.UserGroupCallback;
+import java.util.ArrayList;
+import java.util.List;
 
 @Alternative
 public class RewardsUserGroupCallback implements UserGroupCallback {

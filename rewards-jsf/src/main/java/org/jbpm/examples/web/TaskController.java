@@ -23,10 +23,11 @@ import org.kie.api.task.model.TaskSummary;
 import javax.ejb.EJB;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,8 +43,28 @@ public class TaskController {
     @Inject
     Logger logger;
 
+    private String comment;
+    private Map<String,Object> content;
+    private Task task;
+    private long taskId;
     private String user;
     private List<TaskSummary> tasks;
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public Map<String, Object> getContent() {
+        return content;
+    }
+
+    public void setContent(Map<String, Object> content) {
+        this.content = content;
+    }
 
     public Task getTask() {
         return task;
@@ -53,8 +74,6 @@ public class TaskController {
         this.task = task;
     }
 
-    private Task task;
-
     public long getTaskId() {
         return taskId;
     }
@@ -62,9 +81,6 @@ public class TaskController {
     public void setTaskId(long taskId) {
         this.taskId = taskId;
     }
-
-    private long taskId;
-
 
     public String getUser() {
         return user;
@@ -81,10 +97,13 @@ public class TaskController {
 
 
     public void retrieveTasks () {
+        String message;
         try {
             tasks = taskBean.retrieveTaskList(user);
+            message = "Retrieved " + tasks.size() + " task(s) for user " + user + ".";
+            logger.info(message);
         } catch (Exception e) {
-            String message = "Cannot retrieve task list.";
+            message = "Cannot retrieve task list for user " + user + ".";
             logger.log(Level.SEVERE, message, e);
             facesContext.getExternalContext().getFlash()
                     .put("msg", message);
@@ -92,10 +111,14 @@ public class TaskController {
     }
 
     public void queryTask() {
+        String message;
         try {
             task = taskBean.getTask(taskId);
+            content = taskBean.getContent();
+            message = "Loaded task " + taskId + ".";
+            logger.info(message);
         } catch (Exception e) {
-            String message = "Unable to query for task with id = " + taskId;
+            message = "Unable to query for task with id = " + taskId;
             logger.log(Level.SEVERE, message, e);
             facesContext.getExternalContext().getFlash()
                     .put("msg", message);
@@ -105,11 +128,15 @@ public class TaskController {
     public String approveTask() {
         String message;
         try {
-            taskBean.approveTask(user, taskId);
-            message = "The task with ID " + taskId + " has been successfully approved.";
+            Map<String,Object> result = new HashMap<String,Object>();
+            result.put("out_comment", comment);
+            //result = null;
+            //content.put("out_comment", comment);
+            taskBean.approveTask(user, taskId, result);
+            message = "The task " + taskId + " has been successfully approved.";
             logger.info(message);
         } catch (Exception e) {
-            message = "Unable to approve the task with ID " + taskId + ".";
+            message = "Unable to approve the task " + taskId + ".";
             logger.log(Level.SEVERE, message, e);
         }
         facesContext.getExternalContext().getFlash()
