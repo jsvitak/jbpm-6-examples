@@ -130,8 +130,6 @@ public class TaskController {
         try {
             Map<String,Object> result = new HashMap<String,Object>();
             result.put("out_comment", comment);
-            //result = null;
-            //content.put("out_comment", comment);
             taskBean.approveTask(user, taskId, result);
             message = "The task " + taskId + " has been successfully approved.";
             logger.info(message);

@@ -94,7 +94,7 @@ public class TaskBean {
         Task task;
         try {
             task = taskService.getTaskById(taskId);
-            content = ((InternalTaskService) taskService).getTaskContent(task.getTaskData().getDocumentContentId());
+            content = ((InternalTaskService) taskService).getTaskContent(taskId);
             ut.commit();
         } catch (Exception e) {
             ut.rollback();
@@ -106,15 +106,5 @@ public class TaskBean {
     public Map<String,Object> getContent() {
         return content;
     }
-
-//    public Map<String,Object> getContent(long contentId) throws Exception {
-//        Map<String,Object> content;
-//        try {
-//            content =
-//        } catch (Exception e) {
-//            throw new ProcessOperationException("Cannot get task content " + contentId, e);
-//        }
-//        return content;
-//    }
 
 }
