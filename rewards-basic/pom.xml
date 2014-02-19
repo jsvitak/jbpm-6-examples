@@ -123,6 +123,12 @@
        <version>3.2.5.Final</version>
        <scope>provided</scope>
     </dependency>
+    <dependency>
+       <groupId>dom4j</groupId>
+       <artifactId>dom4j</artifactId>
+       <version>1.6.1</version>
+       <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <repositories>
