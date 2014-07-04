@@ -23,7 +23,6 @@ import javax.enterprise.inject.Alternative;
 
 import org.kie.api.task.UserGroupCallback;
 
-
 @Alternative
 public class RewardsUserGroupCallback implements UserGroupCallback {
 

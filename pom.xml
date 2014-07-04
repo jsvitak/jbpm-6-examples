@@ -4,18 +4,72 @@
 
   <groupId>org.jbpm.examples</groupId>
   <artifactId>jbpm-web-examples</artifactId>
-  <version>6.0.1-SNAPSHOT</version>
+  <version>6.0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>jbpm-web-examples</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jbpm.version>6.0.1.Final</jbpm.version>
+    <jbpm.version>6.0.3-redhat-4</jbpm.version>
   </properties>
   
   <modules>
     <module>rewards-basic</module>
     <module>rewards-jsf</module>
   </modules>
-  
+
+  <repositories>
+    <repository>
+      <id>jboss-public-repository-group</id>
+      <name>JBoss Public Maven Repository Group</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>daily</updatePolicy>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>rh-all</id>
+      <url>http://maven.repository.redhat.com/techpreview/all</url>
+      <layout>default</layout>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>never</updatePolicy>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+        <updatePolicy>never</updatePolicy>
+      </snapshots>
+      <id>jboss-public-repository</id>
+      <name>JBoss Public</name>
+      <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jboss.as.plugins</groupId>
+        <artifactId>jboss-as-maven-plugin</artifactId>
+        <version>7.5.Final</version>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>

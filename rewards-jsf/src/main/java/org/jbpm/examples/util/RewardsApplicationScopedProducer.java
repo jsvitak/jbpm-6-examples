@@ -16,7 +16,7 @@
 
 package org.jbpm.examples.util;
 
-import org.jbpm.runtime.manager.impl.cdi.InjectableRegisterableItemsFactory;
+import org.jbpm.services.task.identity.DefaultUserInfo;
 import org.kie.api.KieServices;
 import org.kie.api.builder.ReleaseId;
 import org.kie.api.runtime.manager.RuntimeEnvironment;
@@ -25,6 +25,7 @@ import org.kie.api.task.UserGroupCallback;
 import org.kie.internal.runtime.manager.cdi.qualifier.PerProcessInstance;
 import org.kie.internal.runtime.manager.cdi.qualifier.PerRequest;
 import org.kie.internal.runtime.manager.cdi.qualifier.Singleton;
+import org.kie.internal.task.api.UserInfo;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
@@ -36,20 +37,14 @@ import javax.persistence.PersistenceUnit;
 @ApplicationScoped
 public class RewardsApplicationScopedProducer {
 
-    @Inject
-    private InjectableRegisterableItemsFactory factory;
-
-    @Inject
-    private UserGroupCallback usergroupCallback;
-
-    @PersistenceUnit(unitName = "org.jbpm.examples.rewards-jsf")
+    @PersistenceUnit(unitName = "org.jbpm.domain")
     private EntityManagerFactory emf;
 
     @Produces
     public EntityManagerFactory produceEntityManagerFactory() {
         if (this.emf == null) {
             this.emf = Persistence
-                    .createEntityManagerFactory("org.jbpm.examples.rewards-jsf");
+                    .createEntityManagerFactory("org.jbpm.domain");
         }
         return this.emf;
     }
@@ -64,14 +59,19 @@ public class RewardsApplicationScopedProducer {
         RuntimeEnvironment environment = RuntimeEnvironmentBuilder.Factory.get()
                 .newDefaultBuilder(releaseId)
                 .entityManagerFactory(emf)
-                .userGroupCallback(usergroupCallback)
-                .registerableItemsFactory(factory)
                 .get();
         return environment;
     }
 
     @Produces
+    public UserInfo produceUserInfo() {
+        // default implementation will load userinfo.properties file on the classpath
+        return new DefaultUserInfo(true);
+    }
+
+    @Produces
     public UserGroupCallback produceUserGroupCallback() {
+        //return new JAASUserGroupCallbackImpl(true);
         return new RewardsUserGroupCallback();
     }
 
