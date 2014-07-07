@@ -29,7 +29,6 @@ import org.kie.internal.task.api.UserInfo;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceUnit;
@@ -71,7 +70,6 @@ public class RewardsApplicationScopedProducer {
 
     @Produces
     public UserGroupCallback produceUserGroupCallback() {
-        //return new JAASUserGroupCallbackImpl(true);
         return new RewardsUserGroupCallback();
     }
 
