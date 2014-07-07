@@ -82,7 +82,7 @@
       </bpmn2:dataOutputAssociation>
       <bpmn2:potentialOwner id="_ItiLR5BaEeO5SrnQu-SFjg">
         <bpmn2:resourceAssignmentExpression id="_ItiLSJBaEeO5SrnQu-SFjg">
-          <bpmn2:formalExpression id="_ItiLSZBaEeO5SrnQu-SFjg">john</bpmn2:formalExpression>
+          <bpmn2:formalExpression id="_ItiLSZBaEeO5SrnQu-SFjg">jiri</bpmn2:formalExpression>
         </bpmn2:resourceAssignmentExpression>
       </bpmn2:potentialOwner>
     </bpmn2:userTask>
