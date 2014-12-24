@@ -35,7 +35,8 @@
             <p>Learn more about jBPM</p>
             <ul>
                <li><a href="http://www.jboss.org/jbpm">jBPM Community</a></li>
-               <li><a href="https://github.com/kylinsoong/jBPM-Drools-Example">QuickStart Demo</a></li>
+               <li><a href="https://github.com/kylinsoong/jBPM-Drools-Example">jBPM Drools Example</a></li>
+               <li><a href="https://github.com/kylinsoong/jbpm-6-examples">jBPM 6 Example</a></li>
             </ul>
             <p>Learn more about Infinispan</p>
             <ul>

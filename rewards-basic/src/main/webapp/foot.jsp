@@ -10,10 +10,11 @@
 <body>
     <img src="resources/gfx/approve_logo.png" alt="jBPM & Infinispan" />
 	<p>
-		<a href="http://www.jboss.org/jbpm/">http://www.jboss.org/jbpm</a> &nbsp;&nbsp; | &nbsp;&nbsp;
-		<a href="http://infinispan.org/">http://infinispan.org</a> &nbsp;&nbsp; | &nbsp;&nbsp;
-		<a href="https://github.com/kylinsoong">https://github.com/kylinsoong</a> &nbsp;&nbsp; | &nbsp;&nbsp;
-		<a href="http://blog.csdn.net/kylinsoong">http://blog.csdn.net/kylinsoong</a> &nbsp;&nbsp;
+		<a href="http://ksoong.org/">ksoong.org</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href="http://www.jbpm.org/">jbpm.org</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href="http://infinispan.org/">infinispan.org</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href="https://github.com/kylinsoong">github.com/kylinsoong</a> &nbsp;&nbsp; | &nbsp;&nbsp;
+		<a href="http://blog.csdn.net/kylinsoong">blog.csdn.net/kylinsoong</a> &nbsp;&nbsp;
 		<br />
 	</p>
 </body>
