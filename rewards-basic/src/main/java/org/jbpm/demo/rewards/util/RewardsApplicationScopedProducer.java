@@ -24,20 +24,30 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceUnit;
 
 import org.jbpm.runtime.manager.impl.RuntimeEnvironmentBuilder;
-import org.jbpm.runtime.manager.impl.cdi.InjectableRegisterableItemsFactory;
 import org.kie.api.io.ResourceType;
+import org.kie.api.runtime.manager.RuntimeEnvironment;
+import org.kie.api.task.UserGroupCallback;
 import org.kie.internal.io.ResourceFactory;
-import org.kie.internal.runtime.manager.RuntimeEnvironment;
+import org.kie.internal.runtime.manager.InternalRegisterableItemsFactory;
 import org.kie.internal.runtime.manager.cdi.qualifier.PerProcessInstance;
 import org.kie.internal.runtime.manager.cdi.qualifier.PerRequest;
 import org.kie.internal.runtime.manager.cdi.qualifier.Singleton;
-import org.kie.internal.task.api.UserGroupCallback;
+
+//import org.jbpm.runtime.manager.impl.RuntimeEnvironmentBuilder;
+//import org.jbpm.runtime.manager.impl.cdi.InjectableRegisterableItemsFactory;
+//import org.kie.api.io.ResourceType;
+//import org.kie.internal.io.ResourceFactory;
+//import org.kie.internal.runtime.manager.RuntimeEnvironment;
+//import org.kie.internal.runtime.manager.cdi.qualifier.PerProcessInstance;
+//import org.kie.internal.runtime.manager.cdi.qualifier.PerRequest;
+//import org.kie.internal.runtime.manager.cdi.qualifier.Singleton;
+//import org.kie.internal.task.api.UserGroupCallback;
 
 @ApplicationScoped
 public class RewardsApplicationScopedProducer {
 
     @Inject
-    private InjectableRegisterableItemsFactory factory;
+    private InternalRegisterableItemsFactory factory;
     
     @Inject
     private UserGroupCallback usergroupCallback;
