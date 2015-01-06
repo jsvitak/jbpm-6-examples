@@ -7,7 +7,7 @@ This simple Java Server Faces example aims to provide an example usage of:
 - User transactions
 - Dynamic deploy of kjar artifact containing a business process
 - Context dependency injection
-- Singleton session manager
+- PerProcessInstance session manager
 - Java server faces
 - Maven build
 
@@ -16,7 +16,8 @@ This simple Java Server Faces example aims to provide an example usage of:
 - Make sure you have an artifact with GAV org.jbpm.examples:rewards:1.0 installed in your local maven repository (`~/.m2/repository`)
  - Check this repo, which provides instructions how to install this artifact [https://github
  .com/jsvitak/jbpm-6-examples-assets](https://github.com/jsvitak/jbpm-6-examples-assets)
-- Download somewhere JBoss EAP 6.1 or 6.2 (BPMS 6.0.3 is based on EAP 6.1, EAP 6.3 will not work)
+- Download JBoss EAP 6.1 or 6.2 from http://www.jboss.org/products/eap/download/ (EAP 6.3 will not work for the jbpm 
+version used here)
 - Start the application server (default datasource is ExampleDS, the same as in EAP, so the rewards-jsf example works out of the box):
  - `cd jboss-eap-6.1/bin`
  - `./standalone.sh`

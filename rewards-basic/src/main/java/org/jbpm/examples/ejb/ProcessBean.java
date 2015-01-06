@@ -16,8 +16,12 @@
 
 package org.jbpm.examples.ejb;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.manager.RuntimeEngine;
+import org.kie.api.runtime.manager.RuntimeManager;
+import org.kie.api.runtime.process.ProcessInstance;
+import org.kie.internal.runtime.manager.cdi.qualifier.PerProcessInstance;
+import org.kie.internal.runtime.manager.context.ProcessInstanceIdContext;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -27,13 +31,8 @@ import javax.ejb.TransactionManagementType;
 import javax.inject.Inject;
 import javax.transaction.Status;
 import javax.transaction.UserTransaction;
-
-import org.kie.api.runtime.KieSession;
-import org.kie.api.runtime.manager.RuntimeEngine;
-import org.kie.api.runtime.manager.RuntimeManager;
-import org.kie.api.runtime.process.ProcessInstance;
-import org.kie.internal.runtime.manager.cdi.qualifier.Singleton;
-import org.kie.internal.runtime.manager.context.EmptyContext;
+import java.util.HashMap;
+import java.util.Map;
 
 @Startup
 @javax.ejb.Singleton
@@ -44,21 +43,20 @@ public class ProcessBean implements ProcessLocal {
     private UserTransaction ut;
 
     @Inject
-    @Singleton
-    private RuntimeManager singletonManager;
+    @PerProcessInstance
+    private RuntimeManager ppiManager;
 
     @PostConstruct
     public void configure() {
         // use toString to make sure CDI initializes the bean
         // this makes sure that RuntimeManager is started asap,
         // otherwise after server restart complete task won't move process forward 
-        singletonManager.toString();
+        ppiManager.toString();
     }
 
     public long startProcess(String recipient) throws Exception {
 
-        RuntimeEngine runtime = singletonManager.getRuntimeEngine(EmptyContext
-                .get());
+        RuntimeEngine runtime = ppiManager.getRuntimeEngine(ProcessInstanceIdContext.get());
         KieSession ksession = runtime.getKieSession();
 
         long processInstanceId = -1;

@@ -20,8 +20,8 @@ import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.manager.RuntimeEngine;
 import org.kie.api.runtime.manager.RuntimeManager;
 import org.kie.api.runtime.process.ProcessInstance;
-import org.kie.internal.runtime.manager.cdi.qualifier.Singleton;
-import org.kie.internal.runtime.manager.context.EmptyContext;
+import org.kie.internal.runtime.manager.cdi.qualifier.PerProcessInstance;
+import org.kie.internal.runtime.manager.context.ProcessInstanceIdContext;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -42,19 +42,19 @@ public class ProcessBean {
     private UserTransaction ut;
 
     @Inject
-    @Singleton
-    private RuntimeManager singletonManager;
+    @PerProcessInstance
+    private RuntimeManager ppiManager;
 
     @PostConstruct
     public void configure() {
         // use toString to make sure CDI initializes the bean
         // this makes sure that RuntimeManager is started asap,
         // otherwise after server restart complete task won't move process forward 
-        singletonManager.toString();
+        ppiManager.toString();
     }
 
     public long startProcess(String recipient, int reward) throws Exception {
-        RuntimeEngine runtime = singletonManager.getRuntimeEngine(EmptyContext
+        RuntimeEngine runtime = ppiManager.getRuntimeEngine(ProcessInstanceIdContext
                 .get());
         KieSession ksession = runtime.getKieSession();
         long processInstanceId = -1;
@@ -66,7 +66,7 @@ public class ProcessBean {
             params.put("reward", reward);
             ProcessInstance processInstance = ksession.startProcess(
                     "org.jbpm.examples.rewards", params);
-                       processInstanceId = processInstance.getId();
+            processInstanceId = processInstance.getId();
             ut.commit();
         } catch (Exception e) {
             if (ut.getStatus() == Status.STATUS_ACTIVE) {

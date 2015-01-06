@@ -10,13 +10,14 @@ This simple example aims to provide an example usage of:
 - Human tasks
 - Persistence
 - Transactions
-- Singleton session manager
+- PerProcessInstance session manager
 - Context dependency injection
 - Maven
 
 ### Steps to run
 - Make sure you have at least Java 6 and Maven 3 installed
-- Download somewhere JBoss EAP 6.1 or 6.2 (BPMS 6.0.3 is based on JBoss EAP 6.1, EAP 6.3 will not work)
+- Download JBoss EAP 6.1 or 6.2 from http://www.jboss.org/products/eap/download/ (EAP 6.3 will not work for the jbpm 
+version used here)
 - Start the application server (default datasource is ExampleDS, the same as in EAP, so the example works out of the box):
  - cd jboss-eap-6.1/bin
  - ./standalone.sh
