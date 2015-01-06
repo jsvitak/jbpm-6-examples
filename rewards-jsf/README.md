@@ -13,11 +13,8 @@ This simple Java Server Faces example aims to provide an example usage of:
 
 ### Steps to run
 - Make sure you have at least Java 6 and Maven 3 installed
-- Make sure you have an artifact with GAV org.jbpm.examples:rewards:1.0 installed in your local maven repository (`~/.m2/repository`)
- - Check this repo, which provides instructions how to install this artifact [https://github
- .com/jsvitak/jbpm-6-examples-assets](https://github.com/jsvitak/jbpm-6-examples-assets)
-- Download JBoss EAP 6.1 or 6.2 from http://www.jboss.org/products/eap/download/ (EAP 6.3 will not work for the jbpm 
-version used here)
+- Download JBoss EAP 6.1 or 6.2 from [JBoss](http://www.jboss.org/products/eap/download/) (EAP 6.3 will not work for 
+the jbpm version used here)
 - Start the application server (default datasource is ExampleDS, the same as in EAP, so the rewards-jsf example works out of the box):
  - `cd jboss-eap-6.1/bin`
  - `./standalone.sh`
@@ -29,4 +26,10 @@ version used here)
  - [Start Reward Process] is to start a new process
  - [Jiri's Task] is to list Jiri's tasks and later approve them
  - [Mary's Task] is to list Mary's tasks and later approve them
-
+ 
+### Optional - load assets from an artifact jar
+- Make sure you have an artifact with GAV org.jbpm.examples:rewards:1.0 installed in your local maven repository (`~/.m2/repository`)
+ - Check this repo, which provides instructions how to install this artifact [https://github
+ .com/jsvitak/jbpm-6-examples-assets](https://github.com/jsvitak/jbpm-6-examples-assets)
+- Update jbpm-6-examples/rewards-jsf/src/main/java/org/jbpm/examples/util/RewardsApplicationScopedProducer.java class to
+load the jar artifact instead of bundled rewards.bpmn2 process model (code is prepared and commented)

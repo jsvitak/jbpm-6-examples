@@ -17,11 +17,11 @@
 package org.jbpm.examples.util;
 
 import org.jbpm.services.task.identity.DefaultUserInfo;
-import org.kie.api.KieServices;
-import org.kie.api.builder.ReleaseId;
+import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.manager.RuntimeEnvironment;
 import org.kie.api.runtime.manager.RuntimeEnvironmentBuilder;
 import org.kie.api.task.UserGroupCallback;
+import org.kie.internal.io.ResourceFactory;
 import org.kie.internal.runtime.manager.cdi.qualifier.PerProcessInstance;
 import org.kie.internal.runtime.manager.cdi.qualifier.PerRequest;
 import org.kie.internal.runtime.manager.cdi.qualifier.Singleton;
@@ -53,12 +53,26 @@ public class RewardsApplicationScopedProducer {
     @PerProcessInstance
     @PerRequest
     public RuntimeEnvironment produceEnvironment(EntityManagerFactory emf) {
+
+        // optional - you can use https://github.com/jsvitak/jbpm-6-examples-assets repo to load jar project on the fly
+
+        /*
         KieServices kieServices = KieServices.Factory.get();
         ReleaseId releaseId = kieServices.newReleaseId( "org.jbpm.examples", "rewards", "1.0" );
         RuntimeEnvironment environment = RuntimeEnvironmentBuilder.Factory.get()
                 .newDefaultBuilder(releaseId)
                 .entityManagerFactory(emf)
                 .get();
+        */
+
+        RuntimeEnvironment environment = RuntimeEnvironmentBuilder.Factory.get()
+                .newDefaultBuilder()
+                .entityManagerFactory(emf)
+                .addAsset(
+                        ResourceFactory
+                                .newClassPathResource("rewards.bpmn2"),
+                        ResourceType.BPMN2).get();
+
         return environment;
     }
 
