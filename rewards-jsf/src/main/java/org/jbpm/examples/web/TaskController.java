@@ -16,11 +16,10 @@
 
 package org.jbpm.examples.web;
 
-import org.jbpm.examples.ejb.TaskBean;
+import org.jbpm.examples.backend.TaskBean;
 import org.kie.api.task.model.Task;
 import org.kie.api.task.model.TaskSummary;
 
-import javax.ejb.EJB;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
@@ -34,7 +33,7 @@ import java.util.logging.Logger;
 @Model
 public class TaskController {
 
-    @EJB
+    @Inject
     TaskBean taskBean;
 
     @Inject

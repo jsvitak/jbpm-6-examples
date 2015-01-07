@@ -16,27 +16,26 @@
 
 package org.jbpm.examples.web;
 
-import java.io.IOException;
-import java.util.List;
+import org.jbpm.examples.backend.ProcessOperationException;
+import org.jbpm.examples.backend.TaskBean;
+import org.kie.api.task.model.TaskSummary;
 
-import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.jbpm.examples.ejb.ProcessOperationException;
-import org.jbpm.examples.ejb.TaskLocal;
-import org.kie.api.task.model.TaskSummary;
+import java.io.IOException;
+import java.util.List;
 
 public class TaskServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    @EJB
-    private TaskLocal taskService;
+    @Inject
+    private TaskBean taskBean;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -48,7 +47,7 @@ public class TaskServlet extends HttpServlet {
 
             List<TaskSummary> taskList;
             try {
-                taskList = taskService.retrieveTaskList(user);
+                taskList = taskBean.retrieveTaskList(user);
             } catch (Exception e) {
                 throw new ServletException(e);
             }
@@ -62,7 +61,7 @@ public class TaskServlet extends HttpServlet {
             String message = "";
             long taskId = Long.parseLong(req.getParameter("taskId"));
             try {
-                taskService.approveTask(user, taskId);
+                taskBean.approveTask(user, taskId);
                 message = "Task (id = " + taskId + ") has been completed by " + user;
             } catch (ProcessOperationException e) {
                 // Recoverable exception

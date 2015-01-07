@@ -16,24 +16,23 @@
 
 package org.jbpm.examples.web;
 
-import java.io.IOException;
+import org.jbpm.examples.backend.ProcessBean;
 
-import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.jbpm.examples.ejb.ProcessLocal;
+import java.io.IOException;
 
 public class ProcessServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    @EJB
-    private ProcessLocal processService;
+    @Inject
+    private ProcessBean processBean;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
@@ -43,7 +42,7 @@ public class ProcessServlet extends HttpServlet {
 
         long processInstanceId = -1;
         try {
-            processInstanceId = processService.startProcess(recipient);
+            processInstanceId = processBean.startProcess(recipient);
         } catch (Exception e) {
             throw new ServletException(e);
         }

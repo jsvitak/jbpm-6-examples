@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.jbpm.examples.ejb;
+package org.jbpm.examples.backend;
 
 import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.manager.RuntimeEngine;
@@ -24,22 +24,16 @@ import org.kie.internal.runtime.manager.cdi.qualifier.PerProcessInstance;
 import org.kie.internal.runtime.manager.context.ProcessInstanceIdContext;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.naming.InitialContext;
 import javax.transaction.Status;
 import javax.transaction.UserTransaction;
 import java.util.HashMap;
 import java.util.Map;
 
-@javax.ejb.Startup
-@javax.ejb.Singleton
-@TransactionManagement(TransactionManagementType.BEAN)
+@ApplicationScoped
 public class ProcessBean {
-
-    @Resource
-    private UserTransaction ut;
 
     @Inject
     @PerProcessInstance
@@ -53,27 +47,37 @@ public class ProcessBean {
         ppiManager.toString();
     }
 
-    public long startProcess(String recipient, int reward) throws Exception {
-        RuntimeEngine runtime = ppiManager.getRuntimeEngine(ProcessInstanceIdContext
-                .get());
+    public long startProcess(String recipient) throws Exception {
+
+        RuntimeEngine runtime = ppiManager.getRuntimeEngine(ProcessInstanceIdContext.get());
         KieSession ksession = runtime.getKieSession();
+
         long processInstanceId = -1;
+
+        UserTransaction ut = (UserTransaction) new InitialContext().lookup( "java:comp/UserTransaction" );
         ut.begin();
+
         try {
             // start a new process instance
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("recipient", recipient);
-            params.put("reward", reward);
             ProcessInstance processInstance = ksession.startProcess(
-                    "org.jbpm.examples.rewards", params);
+                    "com.sample.rewards-basic", params);
+
             processInstanceId = processInstance.getId();
+
+            System.out.println("Process started ... : processInstanceId = "
+                    + processInstanceId);
+
             ut.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             if (ut.getStatus() == Status.STATUS_ACTIVE) {
                 ut.rollback();
             }
-            throw new RuntimeException(e);
+            throw e;
         }
+
         return processInstanceId;
     }
 

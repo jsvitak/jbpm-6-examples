@@ -14,57 +14,65 @@
  * limitations under the License.
  */
 
-package org.jbpm.examples.ejb;
+package org.jbpm.examples.backend;
 
 import org.jbpm.services.task.exception.PermissionDeniedException;
 import org.kie.api.task.TaskService;
-import org.kie.api.task.model.Task;
 import org.kie.api.task.model.TaskSummary;
-import org.kie.internal.task.api.InternalTaskService;
 
-import javax.annotation.Resource;
-import javax.ejb.TransactionManagement;
-import javax.ejb.TransactionManagementType;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.naming.InitialContext;
 import javax.persistence.OptimisticLockException;
 import javax.transaction.RollbackException;
 import javax.transaction.Status;
 import javax.transaction.UserTransaction;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-@javax.ejb.Stateless
-@TransactionManagement(TransactionManagementType.BEAN)
+@RequestScoped
 public class TaskBean {
-
-    @Resource
-    private UserTransaction ut;
 
     @Inject
     TaskService taskService;
-
-    private Map<String,Object> content;
-
+    
     public List<TaskSummary> retrieveTaskList(String actorId) throws Exception {
+
+        UserTransaction ut = (UserTransaction) new InitialContext().lookup( "java:comp/UserTransaction" );
         ut.begin();
+        
         List<TaskSummary> list;
+        
         try {
             list = taskService.getTasksAssignedAsPotentialOwner(actorId, "en-UK");
             ut.commit();
         } catch (RollbackException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
+
+        System.out.println("retrieveTaskList by " + actorId);
+        for (TaskSummary task : list) {
+            System.out.println(" task.getId() = " + task.getId());
+        }
+
         return list;
     }
 
-    public void approveTask(String actorId, long taskId, Map<String,Object> content) throws Exception {
+    public void approveTask(String actorId, long taskId) throws Exception {
+
+        UserTransaction ut = (UserTransaction) new InitialContext().lookup( "java:comp/UserTransaction" );
         ut.begin();
+
         try {
+            System.out.println("approveTask (taskId = " + taskId + ") by " + actorId);
             taskService.start(taskId, actorId);
-            taskService.complete(taskId, actorId, content);
+            taskService.complete(taskId, actorId, null);
+
+            //Thread.sleep(10000); // To test OptimisticLockException
+
             ut.commit();
         } catch (RollbackException e) {
+            e.printStackTrace();
             Throwable cause = e.getCause();
             if (cause != null && cause instanceof OptimisticLockException) {
                 // Concurrent access to the same process instance
@@ -73,6 +81,7 @@ public class TaskBean {
             }
             throw new RuntimeException(e);
         } catch (PermissionDeniedException e) {
+            e.printStackTrace();
             // Transaction might be already rolled back by TaskServiceSession
             if (ut.getStatus() == Status.STATUS_ACTIVE) {
                 ut.rollback();
@@ -81,30 +90,13 @@ public class TaskBean {
             throw new ProcessOperationException("The task (id = " + taskId
                     + ") has likely been started by other users ", e);
         } catch (Exception e) {
+            e.printStackTrace();
             // Transaction might be already rolled back by TaskServiceSession
             if (ut.getStatus() == Status.STATUS_ACTIVE) {
                 ut.rollback();
             }
             throw new RuntimeException(e);
         } 
-    }
-
-    public Task getTask(long taskId) throws Exception {
-        ut.begin();
-        Task task;
-        try {
-            task = taskService.getTaskById(taskId);
-            content = ((InternalTaskService) taskService).getTaskContent(taskId);
-            ut.commit();
-        } catch (Exception e) {
-            ut.rollback();
-            throw new ProcessOperationException("Cannot get task " + taskId, e);
-        }
-        return task;
-    }
-
-    public Map<String,Object> getContent() {
-        return content;
     }
 
 }

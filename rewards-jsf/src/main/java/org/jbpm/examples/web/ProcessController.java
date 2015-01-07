@@ -16,9 +16,8 @@
 
 package org.jbpm.examples.web;
 
-import org.jbpm.examples.ejb.ProcessBean;
+import org.jbpm.examples.backend.ProcessBean;
 
-import javax.ejb.EJB;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -28,7 +27,7 @@ import java.util.logging.Logger;
 @Model
 public class ProcessController {
 
-    @EJB
+    @Inject
     ProcessBean processBean;
 
     @Inject

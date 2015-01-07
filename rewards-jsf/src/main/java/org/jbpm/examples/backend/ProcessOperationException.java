@@ -14,11 +14,18 @@
  * limitations under the License.
  */
 
-package org.jbpm.examples.ejb;
+package org.jbpm.examples.backend;
 
-import javax.ejb.Local;
+/**
+ * 
+ * Used for recoverable exception like OptimisticLockException
+ *
+ */
+public class ProcessOperationException extends Exception {
 
-@Local
-public interface ProcessLocal {
-    public long startProcess(String recipient) throws Exception;
+    private static final long serialVersionUID = 1L;
+
+    public ProcessOperationException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

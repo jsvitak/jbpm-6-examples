@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package org.jbpm.examples.ejb;
+package org.jbpm.examples.backend;
 
-import java.util.List;
+/**
+ * 
+ * Used for recoverable exception like OptimisticLockException
+ *
+ */
+public class ProcessOperationException extends Exception {
 
-import javax.ejb.Local;
+    private static final long serialVersionUID = 1L;
 
-import org.kie.api.task.model.TaskSummary;
-
-@Local
-public interface TaskLocal {
-    public List<TaskSummary> retrieveTaskList(String actorId) throws Exception;
-
-    public void approveTask(String actorId, long taskId) throws Exception;
+    public ProcessOperationException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }
