@@ -20,7 +20,7 @@
 <td><%= task.getName() %></td>
 <td><%= task.getId() %></td>
 <td><%= task.getProcessInstanceId() %></td>
-<td><a href="task?user=<%= user %>&taskId=<%= task.getId() %>&cmd=approve">Approve</a></td>
+<td><a href="task?user=<%= user %>&taskId=<%= task.getId() %>&processInstanceId=<%= task.getProcessInstanceId() %>&cmd=approve">Approve</a></td>
 </tr>
 <% } %>
 </table>

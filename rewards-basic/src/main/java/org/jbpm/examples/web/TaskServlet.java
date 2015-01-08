@@ -16,6 +16,7 @@
 
 package org.jbpm.examples.web;
 
+import org.jbpm.examples.backend.ProcessBean;
 import org.jbpm.examples.backend.ProcessOperationException;
 import org.jbpm.examples.backend.TaskBean;
 import org.kie.api.task.model.TaskSummary;
@@ -27,6 +28,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -36,6 +38,9 @@ public class TaskServlet extends HttpServlet {
 
     @Inject
     private TaskBean taskBean;
+    
+    @Inject
+    private ProcessBean processBean;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -60,8 +65,9 @@ public class TaskServlet extends HttpServlet {
 
             String message = "";
             long taskId = Long.parseLong(req.getParameter("taskId"));
+            long processInstanceId = Long.parseLong(req.getParameter("processInstanceId"));
             try {
-                taskBean.approveTask(user, taskId);
+                processBean.approveTask(user, taskId, processInstanceId);
                 message = "Task (id = " + taskId + ") has been completed by " + user;
             } catch (ProcessOperationException e) {
                 // Recoverable exception
