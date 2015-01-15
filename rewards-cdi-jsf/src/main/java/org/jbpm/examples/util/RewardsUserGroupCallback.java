@@ -18,9 +18,11 @@ package org.jbpm.examples.util;
 
 import org.kie.api.task.UserGroupCallback;
 
+import javax.enterprise.inject.Alternative;
 import java.util.ArrayList;
 import java.util.List;
 
+@Alternative
 public class RewardsUserGroupCallback implements UserGroupCallback {
 
     public boolean existsUser(String userId) {
@@ -32,7 +34,7 @@ public class RewardsUserGroupCallback implements UserGroupCallback {
     }
 
     public List<String> getGroupsForUser(String userId,
-            List<String> groupIds, List<String> allExistingGroupIds) {
+                                         List<String> groupIds, List<String> allExistingGroupIds) {
         List<String> groups = new ArrayList<String>();
         if (userId.equals("jiri"))
             groups.add("PM");

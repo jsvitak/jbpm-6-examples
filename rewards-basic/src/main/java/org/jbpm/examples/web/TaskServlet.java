@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 JBoss Inc
+ * Copyright 2015, Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,15 @@
 
 package org.jbpm.examples.web;
 
-import org.jbpm.examples.backend.ProcessOperationException;
-import org.jbpm.examples.backend.TaskBean;
+import org.jbpm.examples.util.StartupBean;
+import org.jbpm.services.ejb.api.RuntimeDataServiceEJBLocal;
+import org.jbpm.services.ejb.api.UserTaskServiceEJBLocal;
+import org.jbpm.services.task.commands.CompleteTaskCommand;
+import org.jbpm.services.task.commands.CompositeCommand;
+import org.jbpm.services.task.commands.StartTaskCommand;
 import org.kie.api.task.model.TaskSummary;
 
-import javax.inject.Inject;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -34,8 +38,11 @@ public class TaskServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    @Inject
-    private TaskBean taskBean;
+    @EJB
+    private UserTaskServiceEJBLocal userTaskService;
+
+    @EJB
+    private RuntimeDataServiceEJBLocal runtimeDataService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -47,7 +54,7 @@ public class TaskServlet extends HttpServlet {
 
             List<TaskSummary> taskList;
             try {
-                taskList = taskBean.retrieveTaskList(user);
+                taskList = runtimeDataService.getTasksAssignedAsPotentialOwner(user, null);
             } catch (Exception e) {
                 throw new ServletException(e);
             }
@@ -58,16 +65,16 @@ public class TaskServlet extends HttpServlet {
 
         } else if (cmd.equals("approve")) {
 
-            String message = "";
+            String message;
             long taskId = Long.parseLong(req.getParameter("taskId"));
             try {
-                taskBean.approveTask(user, taskId);
+                CompositeCommand compositeCommand = new CompositeCommand(new CompleteTaskCommand(taskId, user, null),
+                        new StartTaskCommand(taskId, user));
+                userTaskService.execute(StartupBean.DEPLOYMENT_ID, compositeCommand);
                 message = "Task (id = " + taskId + ") has been completed by " + user;
-            } catch (ProcessOperationException e) {
-                // Recoverable exception
-                message = "Task operation failed. Please retry : " + e.getMessage();
+                System.out.println(message);
             } catch (Exception e) {
-                // Unexpected exception
+                message = "Task operation failed. Please retry : " + e.getMessage();
                 throw new ServletException(e);
             }
             req.setAttribute("message", message);
@@ -77,4 +84,5 @@ public class TaskServlet extends HttpServlet {
 
         }
     }
+
 }
