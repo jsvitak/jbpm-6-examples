@@ -1,50 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:h="http://java.sun.com/jsf/html"
                 template="/WEB-INF/templates/default.xhtml">
-    <f:metadata>
-        <f:viewParam name="user" value="#{taskController.user}" />
-        <f:viewParam name="taskId" value="#{taskController.taskId}" />
-        <f:event type="preRenderView" listener="#{taskController.retrieveTasks}" />
-    </f:metadata>
+  <f:metadata>
+    <f:viewParam name="user" value="#{taskController.user}" />
+    <f:viewParam name="taskId" value="#{taskController.taskId}" />
+    <f:event type="preRenderView" listener="#{taskController.retrieveTasks}" />
+  </f:metadata>
 
-    <ui:param name="pageTitle" value="Human Tasks" />
+  <ui:param name="pageTitle" value="Human Tasks" />
 
-    <ui:define name="content">
-        <h:panelGroup rendered="#{empty taskController.tasks}">
-            <i>User #{taskController.user} has no pending tasks.</i>
-        </h:panelGroup>
-        <h:dataTable id="userTasksTable" border="1" rendered="#{not empty taskController.tasks}"
-                     value="#{taskController.tasks}" var="_item">
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Id" />
-                </f:facet>
-                <h:outputText id="taskName" value="#{_item.id}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Name" />
-                </f:facet>
-                <h:outputText id="taskName" value="#{_item.name}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Process instance ID" />
-                </f:facet>
-                <h:outputText id="processInstanceId" value="#{_item.processInstanceId}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <h:outputText value="Approval" />
-                </f:facet>
-                <h:link outcome="/approveTask">
-                    <f:param name="taskId" value="#{_item.id}" />
-                    <f:param name="user" value="#{taskController.user}" />
-                    <h:outputText id="approve" value="Approve" />
-                </h:link>
-            </h:column>
-        </h:dataTable>
-    </ui:define>
+  <ui:define name="content">
+    <h:panelGroup rendered="#{empty taskController.tasks}">
+      <i>User #{taskController.user} has no pending tasks.</i>
+    </h:panelGroup>
+    <h:dataTable id="userTasksTable" border="1" rendered="#{not empty taskController.tasks}"
+                 value="#{taskController.tasks}" var="_item">
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="Id" />
+        </f:facet>
+        <h:outputText id="taskId" value="#{_item.id}" />
+      </h:column>
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="Name" />
+        </f:facet>
+        <h:outputText id="taskName" value="#{_item.name}" />
+      </h:column>
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="Process instance ID" />
+        </f:facet>
+        <h:outputText id="processInstanceId" value="#{_item.processInstanceId}" />
+      </h:column>
+      <h:column>
+        <f:facet name="header">
+          <h:outputText value="Approval" />
+        </f:facet>
+        <h:link outcome="/approveTask">
+          <f:param name="taskId" value="#{_item.id}" />
+          <f:param name="user" value="#{taskController.user}" />
+          <h:outputText id="approve" value="Approve" />
+        </h:link>
+      </h:column>
+    </h:dataTable>
+  </ui:define>
 </ui:composition>
