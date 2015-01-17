@@ -16,8 +16,14 @@
 
 package org.jbpm.examples.util;
 
+import org.jbpm.services.api.DeploymentService;
+import org.jbpm.services.cdi.Kjar;
+
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.Produces;
+import javax.enterprise.util.AnnotationLiteral;
+import javax.inject.Inject;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceUnit;
@@ -35,6 +41,15 @@ public class RewardsApplicationScopedProducer {
                     .createEntityManagerFactory("org.jbpm.domain");
         }
         return this.emf;
+    }
+
+    @Inject
+    @Kjar
+    private Instance<DeploymentService> deploymentService;
+
+    @Produces
+    public DeploymentService produceDeploymentService() {
+         return deploymentService.select(new AnnotationLiteral<Kjar>() {}).get();
     }
 
 }

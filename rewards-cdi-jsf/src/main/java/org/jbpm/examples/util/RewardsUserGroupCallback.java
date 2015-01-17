@@ -18,11 +18,11 @@ package org.jbpm.examples.util;
 
 import org.kie.api.task.UserGroupCallback;
 
-import javax.enterprise.inject.Alternative;
+import javax.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;
 
-@Alternative
+@ApplicationScoped
 public class RewardsUserGroupCallback implements UserGroupCallback {
 
     public boolean existsUser(String userId) {

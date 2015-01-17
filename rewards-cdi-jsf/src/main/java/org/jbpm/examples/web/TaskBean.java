@@ -120,7 +120,10 @@ public class TaskBean {
     public void queryTask() {
         String message;
         try {
+            System.out.println("taskId: " + taskId);
             task = userTaskService.getTask(taskId);
+            System.out.println("task: " + task);
+            System.out.println("task.getId(): " + task.getId());
             content = userTaskService.getTaskInputContentByTaskId(taskId);
             message = "Loaded task " + taskId + ".";
             logger.info(message);
