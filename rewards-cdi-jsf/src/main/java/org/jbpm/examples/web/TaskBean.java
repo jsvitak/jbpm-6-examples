@@ -16,33 +16,34 @@
 
 package org.jbpm.examples.web;
 
-import org.jbpm.examples.util.StartupBean;
-import org.jbpm.services.cdi.impl.RuntimeDataServiceCDIImpl;
-import org.jbpm.services.cdi.impl.UserTaskServiceCDIImpl;
-import org.jbpm.services.task.commands.CompleteTaskCommand;
-import org.jbpm.services.task.commands.CompositeCommand;
-import org.jbpm.services.task.commands.StartTaskCommand;
-import org.kie.api.task.model.Task;
-import org.kie.api.task.model.TaskSummary;
-
-import javax.enterprise.inject.Model;
-import javax.enterprise.inject.Produces;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.enterprise.inject.Model;
+import javax.enterprise.inject.Produces;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+
+import org.jbpm.examples.util.StartupBean;
+import org.jbpm.services.api.RuntimeDataService;
+import org.jbpm.services.api.UserTaskService;
+import org.jbpm.services.task.commands.CompleteTaskCommand;
+import org.jbpm.services.task.commands.CompositeCommand;
+import org.jbpm.services.task.commands.StartTaskCommand;
+import org.kie.api.task.model.Task;
+import org.kie.api.task.model.TaskSummary;
+
 @Model
 public class TaskBean {
 
     @Inject
-    private UserTaskServiceCDIImpl userTaskService;
+    private UserTaskService userTaskService;
 
     @Inject
-    private RuntimeDataServiceCDIImpl runtimeDataService;
+    private RuntimeDataService runtimeDataService;
 
     @Inject
     FacesContext facesContext;

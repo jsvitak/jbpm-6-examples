@@ -16,22 +16,23 @@
 
 package org.jbpm.examples.web;
 
-import org.jbpm.examples.util.StartupBean;
-import org.jbpm.services.cdi.impl.ProcessServiceCDIImpl;
-
-import javax.enterprise.inject.Model;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.enterprise.inject.Model;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+
+import org.jbpm.examples.util.StartupBean;
+import org.jbpm.services.api.ProcessService;
+
 @Model
 public class ProcessBean {
 
     @Inject
-    ProcessServiceCDIImpl processService;
+    ProcessService processService;
 
     @Inject
     FacesContext facesContext;

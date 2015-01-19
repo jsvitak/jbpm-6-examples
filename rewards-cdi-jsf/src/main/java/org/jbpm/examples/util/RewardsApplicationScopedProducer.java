@@ -18,6 +18,8 @@ package org.jbpm.examples.util;
 
 import org.jbpm.services.api.DeploymentService;
 import org.jbpm.services.cdi.Kjar;
+import org.jbpm.services.task.audit.JPATaskLifeCycleEventListener;
+import org.kie.api.task.TaskLifeCycleEventListener;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Instance;
@@ -52,4 +54,9 @@ public class RewardsApplicationScopedProducer {
          return deploymentService.select(new AnnotationLiteral<Kjar>() {}).get();
     }
 
+    @Produces
+    public TaskLifeCycleEventListener produceAuditListener() {
+    	return new JPATaskLifeCycleEventListener(true);
+    }
+    
 }
