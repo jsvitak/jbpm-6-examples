@@ -65,6 +65,7 @@ public class ProcessBean {
         try {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("recipient", recipient);
+            params.put("reward", reward);
             processInstanceId = processService.startProcess(StartupBean.DEPLOYMENT_ID,
                     "org.jbpm.examples.rewards", params);
             message = "Process instance " + processInstanceId + " has been successfully started." ;

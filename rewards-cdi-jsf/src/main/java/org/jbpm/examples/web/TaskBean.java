@@ -121,10 +121,7 @@ public class TaskBean {
     public void queryTask() {
         String message;
         try {
-            System.out.println("taskId: " + taskId);
             task = userTaskService.getTask(taskId);
-            System.out.println("task: " + task);
-            System.out.println("task.getId(): " + task.getId());
             content = userTaskService.getTaskInputContentByTaskId(taskId);
             message = "Loaded task " + taskId + ".";
             logger.info(message);
@@ -139,9 +136,10 @@ public class TaskBean {
     public String approveTask() {
         String message;
         try {
-            Map<String,Object> result = new HashMap<String,Object>();
-            result.put("out_comment", comment);
-            CompositeCommand compositeCommand = new CompositeCommand(new CompleteTaskCommand(taskId, user, null),
+            Map<String,Object> outputParams = new HashMap<String,Object>();
+            outputParams.put("out_comment", comment);
+            CompositeCommand compositeCommand = new CompositeCommand(new CompleteTaskCommand(taskId, user,
+                    outputParams),
                     new StartTaskCommand(taskId, user));
             userTaskService.execute(StartupBean.DEPLOYMENT_ID, compositeCommand);
             message = "Task (id = " + taskId + ") has been completed by " + user;
