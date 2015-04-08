@@ -3,18 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.jbpm.examples</groupId>
-    <artifactId>jbpm-web-examples</artifactId>
-    <version>6.2.0-SNAPSHOT</version>
-  </parent>
-
+  <groupId>org.jbpm.examples</groupId>
   <artifactId>rewards-basic</artifactId>
+  <version>6.2.0-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>rewards-basic</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jbpm.version>6.2.0.Final</jbpm.version>
   </properties>
 
   <dependencyManagement>
@@ -72,7 +69,33 @@
       <groupId>org.jbpm</groupId>
       <artifactId>jbpm-services-ejb-impl</artifactId>
     </dependency>
-
   </dependencies>
 
+  <repositories>
+    <repository>
+      <id>jboss-public-repository</id>
+      <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+    </repository>
+    <repository>
+      <id>rh-repository</id>
+      <url>http://maven.repository.redhat.com/techpreview/all</url>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>jboss-public-plugin-repository</id>
+      <url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jboss.as.plugins</groupId>
+        <artifactId>jboss-as-maven-plugin</artifactId>
+        <version>7.7.Final</version>
+      </plugin>
+    </plugins>
+  </build>
+ 
 </project>

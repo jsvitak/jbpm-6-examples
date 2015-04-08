@@ -25,12 +25,16 @@ This simple example aims to provide an example usage of:
 .com/jsvitak/jbpm-6-examples-assets](https://github.com/jsvitak/jbpm-6-examples-assets) into your local maven repository
 - Download JBoss EAP 6.3 from [JBoss](http://www.jboss.org/products/eap/download/)
 - Start the application server:
- - cd jboss-eap-6.3.0/bin
- - ./standalone.sh
+```sh
+cd jboss-eap-6.3.0/bin
+./standalone.sh
+```
 - Build and deploy the example application:
- - cd jbpm-6-examples/rewards-basic
- - mvn clean package
- - mvn jboss-as:deploy
+```sh
+cd jbpm-6-examples/rewards-basic
+mvn clean package
+mvn jboss-as:deploy
+```
 - Visit http://localhost:8080/rewards-basic/ with a web browser
  - [Start Reward Process] is to start a new process
  - [Jiri's Task] is to list Jiri's tasks and approve them
