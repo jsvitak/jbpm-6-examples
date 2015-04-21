@@ -18,10 +18,10 @@ to demonstrate jBPM 6.2 services in combination with CDI and JSF frameworks, in 
 - Make sure you have at least JDK 6 and Maven 3 installed
 - Make sure you have installed org.jbpm.examples:rewards:1.0 maven artifact from [https://github
 .com/jsvitak/jbpm-6-examples-assets](https://github.com/jsvitak/jbpm-6-examples-assets) into your local maven repository
-- Download JBoss EAP 6.3 from [JBoss](http://www.jboss.org/products/eap/download/)
-- Start the application server:
+- Download JBoss EAP 6.4 from [JBoss](http://www.jboss.org/products/eap/download/)
+- Start the application server, for example:
 ```sh
-cd jboss-eap-6.3.0/bin
+cd jboss-eap-6.4.0/bin
 ./standalone.sh
 ```
 - Build and deploy the example application:
