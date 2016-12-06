@@ -28,7 +28,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.jbpm.demo.rewards.audit.AuditDAO;
 import org.jbpm.demo.rewards.ejb.ProcessOperationException;
 import org.jbpm.demo.rewards.ejb.TaskLocal;
 import org.kie.api.task.model.TaskSummary;

@@ -1,0 +1,10 @@
+= jBPM Clustered production deployment
+
+Primary purpose of this document is to set up a clustered jBPM environment, which the cluster should contain:
+
+* Two JBPM Servers running in parallel with Asset repositories synchronised based on Apache Zookeeper and Apache Helix
+* The clustered JBPM shall handle the session management and  timer management required to keep knowledge session activ
+* Mysql Database used for persisting backend process instances, ksessions, history log.
+* LDAP used for authentication and authorization
+
+link:./SUMMARY.adoc[More detailed document]

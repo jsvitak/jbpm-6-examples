@@ -1,0 +1,64 @@
+
+== Download
+
+* Download `jboss-eap-7.0.0.zip` from https://developers.redhat.com/products/eap/download/
+
+* Download `jboss-bpmsuite-6.4.0.GA-deployable-eap7.x.zip` from https://developers.redhat.com/products/bpmsuite/download/
+
+NOTE: To download these zip file, register as a redhat developer is necessary.
+
+== Installaton
+
+NOTE: This section depend on above <<Download, Download>> section.
+
+* Extract the `jboss-eap-7.0.0.zip` to install EAP
+
+[source,java]
+----
+unzip jboss-eap-7.0.0.zip
+----
+
+* Extract the `jboss-bpmsuite-6.4.0.GA-deployable-eap7.x.zip` to a folder
+
+[source,java]
+----
+unzip jboss-bpmsuite-6.4.0.GA-deployable-eap7.x.zip -d bpms
+----
+
+* copy jboss-eap-7.0/bin/* into EAP_HOME/bin/*. When asked, merge the directories.
+
+[source,java]
+----
+cp bpms/jboss-eap-7.0/bin/* jboss-eap-7.0/bin/
+----
+
+* copy jboss-eap-7.0/standalone/configuration/* into EAP_HOME/standalone/configuration/.
+
+[source,java]
+----
+cp bpms/jboss-eap-7.0/standalone/configuration/* jboss-eap-7.0/standalone/configuration/
+----
+
+* copy jboss-eap-7.0/standalone/deployments/* into EAP_HOME/standalone/deployments/
+
+[source,java]
+----
+cp -r bpms/jboss-eap-7.0/standalone/deployments/* jboss-eap-7.0/standalone/deployments/
+----
+
+* Create an application user
+
+[source,java]
+----
+cd jboss-eap-7.0/
+./bin/add-user.sh -a --user bpmsAdmin --password password1! --role kie-server,admin,rest-all,analyst
+----
+
+== Start BPMS Server and login into Business Central
+
+[source,java]
+----
+./standalone.sh
+----
+
+You can now log into Business Central in your web browser: http://localhost:8080/business-central
