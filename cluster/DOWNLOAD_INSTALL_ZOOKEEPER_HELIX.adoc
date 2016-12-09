@@ -1,0 +1,41 @@
+
+= What's this?
+:toc: manual
+:toc-placement: preamble
+
+This section including steps to download and setting a clustering.
+
+== Download
+
+Change into WFY_HOME/clustering directory
+
+* Download `zookeeper-3.3.6.tar.gz` from http://apache.fayea.com/zookeeper/zookeeper-3.3.6/
+
+[source,shell]
+----
+wget http://apache.fayea.com/zookeeper/zookeeper-3.3.6/zookeeper-3.3.6.tar.gz
+----
+
+* Download `helix-core-0.6.6-pkg.tar` from http://helix.apache.org/0.6.6-docs/download.cgi
+
+== Installation
+
+* Change into WFY_HOME/clustering directory.
+
+Note the `WFY_HOME/clustering` used to keep zookeeper/helix for each servers.
+
+* Extract `zookeeper-3.3.6.tar.gz` to WFY_HOME/clustering
+
+[source,shell]
+----
+tar -xvf zookeeper-3.3.6.tar.gz
+----
+
+* Extract `helix-core-0.6.6-pkg.tar` to WFY_HOME/clustering
+
+[source,shell]
+----
+tar -xvf helix-core-0.6.6-pkg.tar -C ~/wildfly-10.0.0.Final/clustering/
+----
+ 
+

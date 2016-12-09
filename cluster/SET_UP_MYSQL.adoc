@@ -1,0 +1,108 @@
+
+= What's it
+:toc: manual
+:toc-placement: preamble
+
+jBPM default configured to use an example h2 data source, this not suitable for production. This section including setps of switch to mysql from default h2.
+
+== Install Mysql on Linux and create jbpm database
+
+* Install Mysql on Linux via:
+
+[source,shell]
+----
+yum install mysql
+----
+
+* Start Mysql in Linux via:
+
+[source,shell]
+----
+service mysqld start
+----
+
+* Log into mysql with root user, create database, user and grant privileges
+
+[source,sql]
+----
+CREATE DATABASE jbpm;
+CREATE USER 'jbpm_user'@'%' IDENTIFIED BY 'jbpm_pass';
+GRANT ALL PRIVILEGES ON jbpm.* TO 'jbpm_user'@'%';
+----
+
+* Log into mysql with jbpm_user import the DDL script to jbpm database
+
+[source,sql]
+----
+mysql -u jbpm_user -p jbpm < ~/work/jbpm/jbpm-installer/db/ddl-scripts/mysql5/mysql5-jbpm-schema.sql
+mysql -u jbpm_user -p jbpm < ~/work/jbpm/jbpm-installer/db/ddl-scripts/mysql5/quartz_tables_mysql.sql
+----
+
+== Set up Mysql Data Source
+
+* Download mysql driver (http://dev.mysql.com/downloads/connector/) to WFY_HOME/installation, assume `mysql-connector-java-5.1.38.jar` be downloaded.
+
+* Add Mysql Driver as a Module
+
+Assume link:./module-add-mysql.cli[module-add-mysql.cli] already be copy to WFY_HOME/installation, make sure WildFly Server is running and execute:
+
+[source,shell]
+----
+./bin/jboss-cli.sh --connect --file=installation/module-add-mysql.cli
+----
+
+* Create Mysql Data Source
+
+Assume link:./create-mysql-ds.cli[create-mysql-ds.cli] already be copy to WFY_HOME/installation, make sure WildFly Server is running and execute:
+
+[source,shell]
+----
+./bin/jboss-cli.sh --connect --file=installation/create-mysql-ds.cli
+----
+
+NOTE: If above cli execute success, you will find the output like `"result" => [true]`, if failed, please check the database name, user, passward, etc.
+
+=== Amend Data Source
+
+If want to chenge datasource url, log into CLI console, execute
+
+[source,java]
+----
+./bin/jboss-cli.sh --connect
+/subsystem=datasources/data-source=MysqlDS:write-attribute(name=connection-url,value="jdbc:mysql://191.168.1.101:3306/jbpm")
+/subsystem=datasources/data-source=quartzNotManagedDS:write-attribute(name=connection-url,value="jdbc:mysql://191.168.1.101:3306/jbpm")
+----
+
+== Switch from h2 to mysql
+
+Make sure WildFly Server is shut dwon, navigate to WildFly Home, Edit `standalone/deployments/jbpm-console.war/WEB-INF/classes/META-INF/persistence.xml`, 
+
+* Locate the <jta-data-source> tag and change it to the JNDI name of your data source, for example:
+
+[source,xml]
+----
+<jta-data-source>java:jboss/datasources/MysqlDS</jta-data-source>
+----
+
+* Locate the <properties> tag and change the hibernate.dialect property, for example:
+
+[source,xml]
+----
+<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+----
+
+* Locate the hibernate.hbm2ddl.auto, chenge the update to none:
+
+[source,xml]
+----
+<property name="hibernate.hbm2ddl.auto" value="none" />
+----
+
+* Assume link:./switch-kie-server.cli[switch-kie-server.cli] already be copy to WFY_HOME/installation, make sure WildFLy Server is running and execute:
+
+[source,shell]
+----
+./bin/jboss-cli.sh --connect --file=installation/switch-kie-server.cli
+----
+
+* Restart WildFly Server, to make sure the switch work fine.

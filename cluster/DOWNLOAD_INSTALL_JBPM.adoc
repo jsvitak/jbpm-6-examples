@@ -1,0 +1,128 @@
+= Overvew
+:toc: manual
+:toc-placement: preamble
+
+This section contain how to download and install jBPM 6.5 version.
+
+== Download
+
+Download jBPM 6.5(jbpm-6.5.0.Final-installer-full.zip) from http://jbpm.org/download/download.html
+
+
+== Installaton
+
+NOTE: This section depend on above <<Download, Download>> section.
+
+=== 0 - Unzip jBPM full zip
+
+[source,java]
+----
+unzip jbpm-6.5.0.Final-installer-full.zip
+----
+
+NOTE: A `jbpm-installer` folder will be generated, the following installation steps depend on this folder.
+
+=== 1 - Install WildFly
+
+* Extract the zip file to install WildFly
+
+[source,java]
+----
+unzip jbpm-installer/lib/jboss-wildfly-10.0.0.Final.zip
+----
+
+* Create placeholder directories
+
+Change into WildFly Home, create 2 directories: `clustering` and `installation`:
+
+[source,java]
+----
+cd wildfly-10.0.0.Final/
+mkdir clustering
+mkdir installation
+----
+
+NOTE: the `clustering` and `installation` directory are used across the whole installation, including clustering, test, etc. **clustering** used to keep cluster related software, scripts. **installation** used to keep other cli/shell scripts, 3rd party libaries, etc.
+
+* Copy all cli/shell scripts to WFY_HOME/installation
+
+[source,java]
+----
+cp *.cli ~/wildfly-10.0.0.Final/installation
+cp *.sh ~/wildfly-10.0.0.Final/installation
+---- 
+
+=== 2 - Install jBPM console
+
+Unzip jbpm console war to WildFly deployment folder and add a dodeploy file:
+
+[source,java]
+----
+unzip jbpm-installer/lib/jbpm-console-6.5.0.Final-wildfly-10.0.0.Final.war -d ./wildfly-10.0.0.Final/standalone/deployments/jbpm-console.war
+touch ./wildfly-10.0.0.Final/standalone/deployments/jbpm-console.war.dodeploy
+----
+
+=== 3 - Install kie Server
+
+Unzip kie server war to WildFly deployment folder and add a dodeploy file:
+
+[source,java]
+----
+unzip jbpm-installer/lib/kie-server-6.5.0.Final-wildfly-10.0.0.Final.war -d ./wildfly-10.0.0.Final/standalone/deployments/kie-server.war
+touch ./wildfly-10.0.0.Final/standalone/deployments/kie-server.war.dodeploy
+----
+
+=== 4. Set up user group
+
+Change into WildFly Home, execute add users shell script link:./add-users.sh[add-users.sh]:
+
+[source,shell]
+----
+./installation/add-users.sh
+----
+
+Alternatively, execute below commands under WildFly Home
+
+[source,shell]
+----
+./bin/add-user.sh -a -u admin -p password1! -g admin,analyst,kiemgmt,rest-all,kie-server
+./bin/add-user.sh -a -u krisv -p password1! -g admin,analyst,rest-all,kie-server
+./bin/add-user.sh -a -u john -p password1! -g analyst,Accounting,PM
+./bin/add-user.sh -a -u mary -p password1! -g analyst,HR
+./bin/add-user.sh -a -u sales-rep -p password1! -g analyst,sales
+./bin/add-user.sh -a -u jack -p password1! -g analyst,IT
+./bin/add-user.sh -a -u katy -p password1! -g analyst,HR
+./bin/add-user.sh -a -u salaboy -p password1! -g admin,analyst,IT,HR,Accounting,rest-all
+./bin/add-user.sh -a -u kieserver -p password1! -g kie-server
+----
+
+NOTE: These users are used for test and use simple plain txt based jaas login module, if use OpenLDAP server, this step is redundant
+
+=== 5. Installation Validation
+ 
+Change into Wildfly Home, edit `bin/standalone.conf`, make sure WildFly/jBPM server has enough memory 
+
+[source,java]
+----
+-Xms2048m -Xmx2048m -XX:MetaspaceSize=256M -XX:MaxMetaspaceSize=512m 
+----
+
+add system properties to disable import example data
+
+[source,java]
+----
+-Dorg.kie.demo=false -Dorg.kie.example=false
+----
+
+start WildFly/jBPM via
+
+[source,java]
+----
+./bin/standalone.sh -b 0.0.0.0 -bmanagement=0.0.0.0 -c standalone-full.xml
+----
+
+Once start finished, access http://localhost:8080/jbpm-console will log into jBPM console with `admin`/`admin`.
+
+== Alternative Options
+
+Download/Install Production BPM Suite is a alternative. Refer to link:./DOWNLOAD_INSTALL.adoc[Download and Installation BPMS 6] for details.

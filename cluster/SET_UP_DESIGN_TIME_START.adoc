@@ -1,0 +1,29 @@
+
+= Starting a Cluster
+
+Start cluster with the following order:
+
+* Start ZooKeeper servers
+
+[source,shell]
+----
+./bin/zkServer.sh start
+----
+
+NOTE: Two nodes need to start accordingly. 
+
+* Start Helix Controller
+
+[source,shell]
+----
+./bin/run-helix-controller.sh --zkSvr server.1:2181,server.2:2181 --cluster jbpm-cluster 2>&1 > ./controller.log &
+----
+
+* Start WilFly/jBPM Server
+
+[source,shell]
+----
+./bin/standalone.sh -b 0.0.0.0 -bmanagement=0.0.0.0 -c standalone-full.xml
+----
+
+NOTE: Two servera need to start accordingly.

@@ -1,10 +1,24 @@
-= jBPM Clustered production deployment
+= jBPM Clustered deployment
 
-Primary purpose of this document is to set up a clustered jBPM environment, which the cluster should contain:
+Primary purpose of this document is to set up a clustered jBPM environment.
 
-* Two JBPM Servers running in parallel with Asset repositories synchronised based on Apache Zookeeper and Apache Helix
-* The clustered JBPM shall handle the session management and  timer management required to keep knowledge session activ
-* Mysql Database used for persisting backend process instances, ksessions, history log.
-* LDAP used for authentication and authorization
+== Cluster Architecture
 
-link:./SUMMARY.adoc[More detailed document]
+Usually, a BPM system mainly contain 3 components:
+
+1. Design Time Tools - Used to design process, a version control and a process persist tool are necessary, some BPM system use RDBMS to do this, but jBPM use git for version control, maven for persist final process, this also for compatible with recent DevOps, Cloud Solution, git is well demonstrate by Github for version control, maven are great for distributing archive across servers/machines.
+2. Runtime Engine - A business process is a abstraction of business logic and involve business people via Human based Task, some time the business logic need roll back or re-orchestrate, that means great number of database interations are necessary. 
+3. RDBMS - Some BPM system use store procedure to operated Database, but jBPM use Hibernate with native sql
+
+After the overview of the basic architecture of jBPM, below figure is for how to cluster jBPM.
+
+image:architecture.png[Cluster Architecture]
+
+* Server1 and Server2 are two physical linux server
+* Both server point to a shred Mysql database
+* Apache Zookeeper and Helix used to replicate assets(process, data modules) between 2 git repos
+* rsync used to keep 2 maven repos synchronised
+* Quartz Enterprise Job Scheduler used to run complexed timer related process
+* Apache httpd with mod_cluster used as a load balancer
+* Enable WildFly HA to make sure web session are replicated
+

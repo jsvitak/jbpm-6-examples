@@ -1,0 +1,2 @@
+# Add Driver Module
+module add --name=com.mysql.jdbc --resources=installation/mysql-connector-java-5.1.38.jar --dependencies=javax.api,javax.transaction.api

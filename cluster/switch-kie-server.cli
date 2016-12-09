@@ -1,0 +1,2 @@
+/system-property=org.kie.server.persistence.ds:add(value="java:jboss/datasources/MysqlDS")
+/system-property=org.kie.server.persistence.dialect:add(value=org.hibernate.dialect.MySQL5Dialect)

@@ -1,0 +1,5 @@
+
+= Design-Time Clustering
+
+Design-time clustering makes use of Apache Helix and Apache ZooKeeper, to share assets(processes, rules, data model objects) in the Git repository between all cluster nodes. This section including contents of how to set up Design-Time Clustering
+

@@ -1,0 +1,26 @@
+= Stopping a Cluster
+
+To stop your cluster, stop the components in the reversed order from starting it:
+
+* Stop WilFly/jBPM Server
+
+Either use the stop shell scripts, or Ctrl + c.
+
+NOTE: Two servers need to stop accordingly. 
+
+* Stop Helix Controller
+
+[source,shell]
+----
+ps aux|grep HelixControllerMain
+kill -15 <pid of HelixControllerMain>
+----
+
+* Stop ZooKeeper server(s).
+
+[source,shell]
+----
+./bin/zkServer.sh stop
+----
+
+NOTE: Two nodes need to stop accordingly.

@@ -1,0 +1,55 @@
+
+= Confige WildFly/jBPM Server
+
+Configure individual server nodes with a series if System properties to point to Apache Helix controller.
+
+== Confige Server 1
+
+* Create the following directories on Server 1
+
+[source,shell]
+----
+mkdir -p /tmp/jbpm/node1
+mkdir -p /tmp/jbpm/quartz
+----
+
+* Copy link:./design-time-cluster-server-1.cli[design-time-cluster-server-1.cli] to WFY_HOME/installation, make sure WildFLy Server is running and execute:
+
+[source,shell]
+----
+./bin/jboss-cli.sh --connect --file=installation/design-time-cluster-server-1.cli
+----
+
+* If want to amend s specific property, log into CLI console, ececute
+
+[source,shell]
+----
+./bin/jboss-cli.sh --connect
+/system-property=org.uberfire.cluster.zk:write-attribute(name=value,value="10.66.192.120:2181,10.66.192.121:2181")
+----
+
+== Confige Server 2
+
+* Create the following directories on Server 2
+
+[source,shell]
+----
+mkdir -p /tmp/jbpm/node2
+mkdir -p /tmp/jbpm/quartz
+----
+
+* Copy link:./design-time-cluster-server-2.cli[design-time-cluster-server-2.cli] to WFY_HOME/installation, make sure WildFLy Server is running and execute:
+
+[source,shell]
+----
+./bin/jboss-cli.sh --connect --file=installation/design-time-cluster-server-2.cli
+----
+
+* If want to amend s specific property, log into CLI console, ececute
+
+[source,shell]
+----
+./bin/jboss-cli.sh --connect
+/system-property=org.uberfire.cluster.zk:write-attribute(name=value,value="10.66.192.120:2181,10.66.192.121:2181")
+----
+

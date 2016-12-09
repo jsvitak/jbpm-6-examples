@@ -1,0 +1,25 @@
+
+# Add Driver
+if (outcome != success) of /subsystem=datasources/jdbc-driver=mysql:read-resource
+    /subsystem=datasources/jdbc-driver=mysql:add(driver-name=mysql, driver-module-name=com.mysql.jdbc, driver-xa-datasource-class-name=com.mysql.jdbc.jdbc2.optional.MysqlXADataSource)
+end-if
+
+# Add Data Source
+if (outcome != success) of /subsystem=datasources/data-source=MysqlDS:read-resource
+    /subsystem=datasources/data-source=MysqlDS:add(driver-name=mysql, jndi-name=java:jboss/datasources/MysqlDS, connection-url=jdbc:mysql://localhost:3306/jbpm, user-name=jbpm_user, password=jbpm_pass, enabled=true, use-java-context=true, min-pool-size=5, max-pool-size=30)
+end-if
+
+if (outcome != success) of /subsystem=datasources/data-source=quartzNotManagedDS:read-resource
+    /subsystem=datasources/data-source=quartzNotManagedDS:add(driver-name=mysql, jta=false, jndi-name=java:jboss/datasources/quartzNotManagedDS, connection-url=jdbc:mysql://localhost:3306/jbpm, user-name=jbpm_user, password=jbpm_pass, enabled=true, use-java-context=true, min-pool-size=5, max-pool-size=30)
+end-if
+
+
+# Verify adding
+if (outcome == success) of /subsystem=datasources/data-source=MysqlDS:read-resource
+    /subsystem=datasources/data-source=MysqlDS:test-connection-in-pool()
+end-if
+
+if (outcome == success) of /subsystem=datasources/data-source=quartzNotManagedDS:read-resource
+    /subsystem=datasources/data-source=quartzNotManagedDS:test-connection-in-pool()
+end-if
+

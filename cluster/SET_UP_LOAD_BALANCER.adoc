@@ -1,0 +1,6 @@
+
+= Configure Load Balancer
+
+The `httpd` web server with `mod_cluster` place as a front Load Balancer, works place fine with backend WildFly/jBPM Server.
+
+This is optional.

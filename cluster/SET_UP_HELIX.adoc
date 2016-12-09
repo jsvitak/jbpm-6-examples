@@ -1,0 +1,38 @@
+= Configure Apache Helix
+
+* Change into WFY_HOME/clustering/helix-core, create the cluster
+
+[source,shell]
+----
+./bin/helix-admin.sh --zkSvr server.1:2181,server.2:2181 --addCluster jbpm-cluster
+----
+
+* Add nodes to the cluster
+
+[source,shell]
+----
+./bin/helix-admin.sh --zkSvr server.1:2181,server.2:2181 --addNode jbpm-cluster node1:12345
+./bin/helix-admin.sh --zkSvr server.1:2181,server.2:2181 --addNode jbpm-cluster node2:12346
+----
+
+* Add resources to the cluster.
+
+[source,shell]
+----
+./bin/helix-admin.sh --zkSvr server.1:2181,server.2:2181 --addResource jbpm-cluster vfs-repo 1 LeaderStandby AUTO_REBALANCE
+----
+
+* Rebalance the cluster with the three nodes.
+
+[source,shell]
+----
+./bin/helix-admin.sh --zkSvr server.1:2181,server.2:2181 --rebalance jbpm-cluster vfs-repo 1
+./bin/helix-admin.sh --zkSvr server.1:2181,server.2:2181 --rebalance jbpm-cluster vfs-repo 2
+----
+
+* Start the Helix controller in all the nodes in the cluster.
+
+[source,shell]
+----
+./bin/run-helix-controller.sh --zkSvr server.1:2181,server.2:2181 --cluster jbpm-cluster 2>&1 > ./controller.log &
+----

@@ -1,0 +1,20 @@
+
+= Configure Quartz
+
+Configure Quartz is necessary to make sure jBPM cluster works fine.
+
+* Prepare data source
+
+This step are finished in link:./SET_UP_MYSQL.adoc#_set_up_mysql_data_source[Set up data sources] section, `quartzNotManagedD` should be used in the following configuration.
+
+* Create Quartz tables on `quartzNotManagedD` referred database.
+
+[source,java]
+----
+cp jbpm-installer/db/ddl-scripts/mysql5/quartz_tables_mysql.sql wildfly-10.0.0.Final/installation/
+mysql -u jbpm_user -p jbpm < wildfly-10.0.0.Final/installation/quartz_tables_mysql.sql
+----
+
+* Create the Quartz configuration file link:./quartz-definition-mysql.properties[quartz-definition-mysql.properties]
+
+Copy it to `/tmp/jbpm/quartz` which compatible with `org.quartz.properties` property definition in link:./SET_UP_WILDFLY.adoc[Configure WildFly/jBPM].

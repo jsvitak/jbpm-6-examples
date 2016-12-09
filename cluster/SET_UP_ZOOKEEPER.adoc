@@ -1,0 +1,36 @@
+
+= Configure Apache ZooKeeper
+
+* Change into WFY_HOME/clustering/zookeeper/conf, create a `zoo.cfg` from sample
+
+[source,shell]
+----
+cp zoo_sample.cfg zoo.cfg
+----
+
+* Edit `zoo.cfg`, add the following content
+
+[source,xml]
+----
+# Defining ZooKeeper ensemble.
+server.1=localhost:2888:3888
+server.2=localhost:2889:3889
+----
+
+* Assign a node ID to each member that will run ZooKeeper. For example, use 1, 2 for node 1, node 2 respectively. The ZooKeeper node ID is specified in a field called myid under the data directory of ZooKeeper on each node. For example, on node 1, execute:
+
+[source,shell]
+----
+mkdir /tmp/zookeeper
+echo "1" > /tmp/zookeeper/myid
+----
+
+* Start Zookeeper
+
+Change into zookeeper home execute
+
+[source,shell]
+----
+./bin/zkServer.sh start
+----
+

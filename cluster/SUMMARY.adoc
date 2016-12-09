@@ -1,5 +1,17 @@
 = Summary
 
-. link:./DOWNLOAD_INSTALL.adoc[Download and Installation]
-
-
+. link:./DOWNLOAD_INSTALL_JBPM.adoc[Download and Installation]
+.. link:./SET_UP_MYSQL.adoc[Use Mysq replace default h2]
+. link:./SET_UP_DESIGN_TIME.adoc[Clustering Design Time]
+.. link:./DOWNLOAD_INSTALL_ZOOKEEPER_HELIX.adoc[Download and Installation]
+.. link:./SET_UP_ZOOKEEPER.adoc[Configure ZooKeeper]
+.. link:./SET_UP_HELIX.adoc[Configure Helix]
+.. link:./SET_UP_WILDFLY.adoc[Configure WildFly/jBPM]
+.. link:./SET_UP_DESIGN_TIME_START.adoc[Start]
+.. link:./SET_UP_DESIGN_TIME_STOP.adoc[Stop]
+. link:./SET_UP_RUNTIME.adoc[Clustering Run Time]
+.. link:./SET_UP_QUARTZ.adoc[Configure Quartz]
+.. link:./SET_UP_LOAD_BALANCER.adoc[Configure httpd/mod_cluster]
+.. link:./SET_UP_KIE_SERVER.adoc[Configure Kie Server]
+.. link:./SET_UP_OTHER.adoc[Other]
+. link:./OTHER.adoc[Sample Commands & Scripts]
