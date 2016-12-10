@@ -1,4 +1,0 @@
-
-= Confgiure Kie Server
-
-This section is optional

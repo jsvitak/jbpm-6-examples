@@ -1,6 +1,24 @@
 
-= Configure Load Balancer
+= Configuring Load Balancer
 
-The `httpd` web server with `mod_cluster` place as a front Load Balancer, works place fine with backend WildFly/jBPM Server.
+This section use Apache `httpd` with `mod_proxy_balancer` as a Load Balancer, stick session are enabled.
 
-This is optional.
+* httpd install
+
+[source,shell]
+----
+yum -y install httpd 
+----
+
+* httpd configuration
+
+Copy link:./jbpm-cluster.conf[jbpm-cluster.conf] to `/etc/httpd/conf.d`
+
+* httpd start
+
+[source,shell]
+----
+systemctl start httpd.service
+----
+
+Once httpd started, http://localhost:8080/jbpm-console/ can use to log into jbpm console.
