@@ -1,0 +1,21 @@
+= Switch to LDAP
+
+This section including how to configure jbpm-console to use LDAP for authentication and authorization of users.
+
+* Change into WildFly Home, execute link:./create-security-domain-ldap.cli[create-security-domain-ldap.cli] cli:
+
+[source,shell]
+----
+./bin/jboss-cli.sh --connect --file=installation/create-security-domain-ldap.cli
+----
+
+* Edit `jbpm-console.war/WEB-INF/jboss-web.xml`, change security domain to `jbpm-cluster`
+
+[source,xml]
+----
+<jboss-web>
+    <security-domain>jbpm-cluster</security-domain>
+</jboss-web>
+---- 
+
+NOTE: `admin,analyst,reviewer` are necessary in LDAP.
