@@ -12,13 +12,13 @@ Usually, a BPM system mainly contain 3 components:
 
 After the overview of the basic architecture of jBPM, below figure is for how to cluster jBPM.
 
-image:architecture.png[Cluster Architecture]
+image:architecture-v2.png[Cluster Architecture]
 
 * Server1 and Server2 are two physical linux server
-* Both server point to a shred Mysql database
-* Apache Zookeeper and Helix used to replicate assets(process, data modules) between 2 git repos
-* rsync used to keep 2 maven repos synchronised
-* Quartz Enterprise Job Scheduler used to run complexed timer related process
-* Apache httpd with mod_cluster used as a load balancer
-* Enable WildFly HA to make sure web session are replicated
+* Both servers point to a shred Mysql database
+* Both servers point to a shred Maven repository
+* Both servers point to a shred OpenLDAP server
+* Apache Zookeeper and Helix used to replicate assets(process, data modules) between 2 git repositories
+* Quartz Job Scheduler used to run complexed timer related process
+* Apache httpd with mod_proxy_balancer used as a load balancer
 

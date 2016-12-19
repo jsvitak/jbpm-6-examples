@@ -14,4 +14,4 @@
 . link:./START_STOP.adoc[Start & Stop]
 .. link:./START.adoc[Start]
 .. link:./STOP.adoc[Stop]
-. link:./OTHER.adoc[Sample Commands & Scripts]
+. link:./OTHER.adoc[Scripts]

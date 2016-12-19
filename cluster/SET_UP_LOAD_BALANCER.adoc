@@ -1,6 +1,31 @@
 
 = Configuring Load Balancer
 
+== Setup apache 2 in ubuntu 14.04
+
+* apache 2 install
+
+[source,shell]
+----
+sudo apt-get install apache2
+----
+
+* Edit `/etc/apache2/apache2.conf` add ServerName
+
+[source,xml]
+----
+ServerName 192.168.31.103
+----
+
+* apache restart
+
+[source,shell]
+----
+/etc/init.d/apache2 restart
+----
+
+== Setup httpd on RHEL 7
+
 This section use Apache `httpd` with `mod_proxy_balancer` as a Load Balancer, stick session are enabled.
 
 * httpd install

@@ -26,14 +26,29 @@ ant start.h2
 ./bin/standalone.sh --server-config=standalone-full.xml -Dorg.kie.demo=true -Dorg.kie.example=false -Dorg.kie.server.id=default-kieserver -Dorg.kie.server.persistence.ds=java:jboss/datasources/jbpmDS -Dorg.kie.server.controller=http://localhost:8080/jbpm-console/rest/controller -Dorg.kie.server.location=http://localhost:8080/kie-server/services/rest/server
 ----
 
-== Helix comfigure 
+== Zookeeper configure
 
 [source,shell]
 ----
-./bin/helix-admin.sh --zkSvr 10.66.192.120:2181,10.66.129.60:2181 --addCluster jbpm-cluster
-./bin/helix-admin.sh --zkSvr 10.66.192.120:2181,10.66.129.60:2181 --addNode jbpm-cluster node1:12345
-./bin/helix-admin.sh --zkSvr 10.66.192.120:2181,10.66.129.60:2181 --addNode jbpm-cluster node2:12346
-./bin/helix-admin.sh --zkSvr 10.66.192.120:2181,10.66.129.60:2181 --addResource jbpm-cluster vfs-repo 1 LeaderStandby AUTO_REBALANCE
-./bin/helix-admin.sh --zkSvr 10.66.192.120:2181,10.66.129.60:2181 --rebalance jbpm-cluster vfs-repo 2
-./bin/run-helix-controller.sh --zkSvr 10.66.192.120:2181,10.66.129.60:2181 --cluster jbpm-cluster 2>&1 > ./controller.log &
+/home/ubuntu/wildfly-10.0.0.Final/clustering/zookeeper-3.3.6/zookeeper
+
+server.1=192.168.31.103:2888:3888
+server.2=192.168.31.102:2889:3889
+----
+
+== Helix configure 
+
+[source,shell]
+----
+./bin/helix-admin.sh --zkSvr 192.168.31.103:2181,192.168.31.102:2181 --addCluster jbpm-cluster
+
+./bin/helix-admin.sh --zkSvr 192.168.31.103:2181,192.168.31.102:2181 --addNode jbpm-cluster jbpm-server-1:12345
+./bin/helix-admin.sh --zkSvr 192.168.31.103:2181,192.168.31.102:2181 --addNode jbpm-cluster jbpm-server-2:12346
+
+./bin/helix-admin.sh --zkSvr 192.168.31.103:2181,192.168.31.102:2181 --addResource jbpm-cluster vfs-repo 1 LeaderStandby AUTO_REBALANCE
+
+./bin/helix-admin.sh --zkSvr 192.168.31.103:2181,192.168.31.102:2181 --rebalance jbpm-cluster vfs-repo 1
+./bin/helix-admin.sh --zkSvr 192.168.31.103:2181,192.168.31.102:2181 --rebalance jbpm-cluster vfs-repo 2
+
+./bin/run-helix-controller.sh --zkSvr 192.168.31.103:2181,192.168.31.102:2181 --cluster jbpm-cluster 2>&1 > ./controller.log &
 ----

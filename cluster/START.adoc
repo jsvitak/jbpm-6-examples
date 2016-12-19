@@ -23,7 +23,7 @@ NOTE: Two nodes need to start accordingly.
 
 [source,shell]
 ----
-./bin/standalone.sh -b 0.0.0.0 -bmanagement=0.0.0.0 -c standalone-full.xml
+./bin/standalone.sh -b 0.0.0.0 -bmanagement=0.0.0.0 -c standalone-full.xml 2>&1 > ./console.log &
 ----
 
 NOTE: Two servera need to start accordingly.
