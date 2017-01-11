@@ -1,22 +1,17 @@
-rewards-basic
-=============
+rewards-cdi-jsf
+===============
 
-This is an example web application for jBPM 6. It was created by forking the rewards-basic application by Toshiya 
-Kobayashi:
-https://github.com/tkobayas/jbpm5example/tree/master/rewards-basic
-
-Also the project structure has changed from Java EE 5 to Java EE 6.
-The further upgrade was from jBPM 6.0 core APIs to jBPM 6.2 services.
-
-This simple example aims to provide an example usage of:
-- Human tasks
-- jBPM EJB services
+This simple rewards-cdi-jsf example web application is a modification of rewards-basic application
+to demonstrate jBPM 6.2 services in combination with CDI and JSF frameworks, in particular: 
+- Human tasks including data passing and forms
+- jBPM CDI services
  - Deployment service
  - Process service
  - Runtime data service
  - User task service
-- Persistence configuration 
-- JSP frontend
+- Persistence configuration
+- Context and Dependency Injection beans 
+- Java Server Faces frontend
 - Maven build
 
 ### Steps to run
@@ -31,13 +26,12 @@ cd jboss-eap-6.4.0/bin
 ```
 - Build and deploy the example application:
 ```sh
-cd jbpm-6-examples/rewards-basic
+cd jbpm-6-examples/rewards-cdi-jsf
 mvn clean package
 mvn jboss-as:deploy
 ```
-- Visit http://localhost:8080/rewards-basic/ with a web browser
+- Visit [http://localhost:8080/rewards-jsf/](http://localhost:8080/rewards-cdi-jsf/) with a web browser
  - [Start Reward Process] is to start a new process
  - [Jiri's Task] is to list Jiri's tasks and approve them
  - [Mary's Task] is to list Mary's tasks and approve them
-
 

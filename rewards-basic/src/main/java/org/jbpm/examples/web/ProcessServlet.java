@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 JBoss Inc
+ * Copyright 2015, Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,11 @@
 
 package org.jbpm.examples.web;
 
-import org.jbpm.examples.backend.ProcessBean;
 
-import javax.inject.Inject;
+import org.jbpm.examples.util.StartupBean;
+import org.jbpm.services.ejb.api.ProcessServiceEJBLocal;
+
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -26,13 +28,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class ProcessServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    @Inject
-    private ProcessBean processBean;
+    @EJB
+    private ProcessServiceEJBLocal processService;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
@@ -42,7 +47,11 @@ public class ProcessServlet extends HttpServlet {
 
         long processInstanceId = -1;
         try {
-            processInstanceId = processBean.startProcess(recipient);
+            Map<String, Object> params = new HashMap<String, Object>();
+            params.put("recipient", recipient);
+            processInstanceId = processService.startProcess(StartupBean.DEPLOYMENT_ID,
+                    "org.jbpm.examples.rewards", params);
+            System.out.println("Process instance " + processInstanceId + " has been successfully started.");
         } catch (Exception e) {
             throw new ServletException(e);
         }

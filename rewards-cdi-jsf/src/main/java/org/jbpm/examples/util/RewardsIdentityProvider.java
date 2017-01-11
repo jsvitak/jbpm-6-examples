@@ -16,28 +16,27 @@
 
 package org.jbpm.examples.util;
 
-import org.kie.api.task.UserGroupCallback;
+import org.kie.internal.identity.IdentityProvider;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RewardsUserGroupCallback implements UserGroupCallback {
+public class RewardsIdentityProvider implements IdentityProvider {
 
-    public boolean existsUser(String userId) {
-        return userId.equals("jiri") || userId.equals("mary") || userId.equals("Administrator");
+    private List<String> roles = new ArrayList<String>();
+
+    @Override
+    public String getName() {
+        return "system";
     }
 
-    public boolean existsGroup(String groupId) {
-        return groupId.equals("PM") || groupId.equals("HR");
+    @Override
+    public List<String> getRoles() {
+        return roles;
     }
 
-    public List<String> getGroupsForUser(String userId,
-            List<String> groupIds, List<String> allExistingGroupIds) {
-        List<String> groups = new ArrayList<String>();
-        if (userId.equals("jiri"))
-            groups.add("PM");
-        else if (userId.equals("mary"))
-            groups.add("HR");
-        return groups;
+    @Override
+    public boolean hasRole(String s) {
+        return true;
     }
 }
