@@ -16,7 +16,7 @@ NOTE: Two nodes need to start accordingly.
 
 [source,shell]
 ----
-./bin/run-helix-controller.sh --zkSvr server.1:2181,server.2:2181 --cluster jbpm-cluster 2>&1 > ./controller.log &
+./bin/run-helix-controller.sh --zkSvr 192.168.31.103:2181,192.168.31.102:2181 --cluster jbpm-cluster 2>&1 > ./controller.log &
 ----
 
 * Start WilFly/jBPM Server

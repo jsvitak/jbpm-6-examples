@@ -1,0 +1,10 @@
+import org.specialtripsagency.Hotel;
+
+rule "RetractHotel"
+	dialect "mvel"
+	ruleflow-group "retract"
+	when
+		hotel : Hotel( )
+	then
+		retract(hotel);
+end

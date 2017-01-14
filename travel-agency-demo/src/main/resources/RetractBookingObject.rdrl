@@ -1,0 +1,10 @@
+import org.specialtripsagency.BookingObject;
+
+rule "RetractBookingObject"
+	dialect "mvel"
+	ruleflow-group "retract"
+	when
+		bookingObject : BookingObject( )
+	then
+		retract(bookingObject);
+end

@@ -8,6 +8,15 @@ Either use the stop shell scripts, or Ctrl + c.
 
 NOTE: Two servers need to stop accordingly. 
 
+Alternatively, use jps -l find the jBPM server process, kill the process
+
+[source,shell]
+----
+$ /usr/lib/jvm/jdk1.8.0_111/bin/jps -l 
+18822 /home/ubuntu/wildfly-10.0.0.Final/jboss-modules.jar
+$ kill -9 18822
+----
+
 * Stop Helix Controller
 
 [source,shell]

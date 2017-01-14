@@ -1,0 +1,21 @@
+
+== Adminisration From CLI
+
+Change into Zookeeper home, connect to CLI
+
+[source,java]
+----
+./bin/zkCli.sh
+----
+
+Refer to https://zookeeper.apache.org/doc/trunk/zookeeperAdmin.html#The+Four+Letter+Words for completed Adminisration Commands.
+
+== Adminisration From jconsole
+
+[source,java]
+----
+$ /usr/lib/jvm/jdk1.8.0_111/bin/jconsole
+----
+
+Once start, select `org.apache.zookeeper.server.quorum.QuorumPeerMain`.
+

@@ -1,0 +1,10 @@
+import org.specialtripsagency.TravelDetails;
+
+rule "RetractTravelDetails"
+	dialect "mvel"
+	ruleflow-group "retract"
+	when
+		travelDetails : TravelDetails( )
+	then
+		retract(travelDetails);
+end

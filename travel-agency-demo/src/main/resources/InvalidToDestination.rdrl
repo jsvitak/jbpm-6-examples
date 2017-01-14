@@ -1,0 +1,15 @@
+import java.lang.Number;
+import org.specialtripsagency.Rejection;
+import org.specialtripsagency.TravelDetails;
+
+rule "InvalidToDestination"
+	dialect "mvel"
+	ruleflow-group "rejection"
+	when
+		TravelDetails( toDestination not in ( "Edinburgh", "Glasgow" ) )
+	then
+		Rejection fact0 = new Rejection();
+		fact0.setReason( "Sorry!!! We do not provide services to this destination." );
+		insert( fact0 );
+		System.out.println("Rejected due to Invalid To Destination");
+end

@@ -1,0 +1,10 @@
+import org.specialtripsagency.Applicant;
+
+rule "RetractApplicant"
+	dialect "mvel"
+	ruleflow-group "retract"
+	when
+		applicant : Applicant( )
+	then
+		retract(applicant);
+end

@@ -1,0 +1,29 @@
+//created on: Jun 11, 2014
+package org.specialtripsagency
+
+//list any import classes here.
+import org.specialtripsagency.BookingObject
+import org.specialtripsagency.Applicant
+import org.specialtripsagency.Flight
+import org.specialtripsagency.Hotel
+
+//declare any global variables here
+
+rule "ApplicantWithoutEmailAddress"
+
+    ruleflow-group "rejection"
+    no-loop true
+
+    when
+        //conditions
+	// check that the email address is not null and email address contains '@' in it
+        applicant : Applicant(emailAddress == null || !emailAddress.matches(".*[@].*") )
+    then
+        //actions
+	System.out.println("\nRunning ApplicantWithoutEmailAddress RULE");
+	System.out.println("Warning!!! applicant object does not have a valid email address");
+        //set reject conditions
+	Rejection fact0 = new Rejection();
+        fact0.setReason( "Invalid Email Address of Applicant!!!" );
+        insert( fact0 );	
+end

@@ -1,0 +1,52 @@
+
+== jBPM console
+
+* http://10.10.103.226:8080/jbpm-console
+* http://10.10.103.227:8080/jbpm-console
+
+=== Users/Roles
+
+|===
+|User |Password |Role 
+
+|admin
+|password1!
+|admin,analyst,kiemgmt,rest-all,kie-server
+
+|krisv
+|password1!
+|admin,analyst,rest-all,kie-server
+
+|john
+|password1!
+|analyst,Accounting,PM
+
+|mary
+|password1!
+|analyst,HR
+
+|sales-rep
+|password1!
+|analyst,sales
+
+|jack
+|password1!
+|analyst,IT
+
+|katy
+|password1!
+|analyst,HR
+
+|salaboy
+|password1!
+|admin,analyst,IT,HR,Accounting,rest-all
+
+|kieserver
+|password1!
+|kie-server
+
+|===
+
+== Start
+
+Refer to link:START.adoc[Start Cluster] Start WilFly/jBPM Server section.

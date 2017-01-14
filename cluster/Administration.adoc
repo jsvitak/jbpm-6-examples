@@ -1,0 +1,17 @@
+
+= jBPM Cluster Administration
+
+|===
+|Server |Home Directory
+
+|jBPM
+|/home/ubuntu/wildfly-10.0.0.Final/
+
+|Zookeeper
+|/home/ubuntu/wildfly-10.0.0.Final/clustering/zookeeper-3.3.6/
+
+|Helix
+|/home/ubuntu/wildfly-10.0.0.Final/clustering/helix-core
+
+|===
+

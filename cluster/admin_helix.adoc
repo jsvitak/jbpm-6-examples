@@ -1,0 +1,10 @@
+
+== Administration From CLI
+
+Change into Helix home, execute CLI via
+
+----
+./bin/helix-admin.sh --zkSvr <ZookeeperServerAddress> <command> <parameters>
+----
+
+Refer to http://helix.apache.org/0.6.6-docs/tutorial_admin.html for completed commands list.

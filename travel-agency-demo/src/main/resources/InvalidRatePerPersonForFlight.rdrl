@@ -1,0 +1,15 @@
+import java.lang.Number;
+import org.specialtripsagency.Flight;
+import org.specialtripsagency.Rejection;
+
+rule "InvalidRatePerPersonForFlight"
+	dialect "mvel"
+	ruleflow-group "rejection"
+	when
+		Flight( ratePerPerson <= 0 || ratePerPerson >= 10000 || ratePerPerson == null )
+	then
+		Rejection fact0 = new Rejection();
+		fact0.setReason( "Invalid ratePerPerson received for flight!!!" );
+		insert( fact0 );
+		System.out.println("Rejected as Invalid rate Per Person");
+end

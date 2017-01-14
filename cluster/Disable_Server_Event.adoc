@@ -1,0 +1,13 @@
+
+= Disable Server Sent Event
+
+There have been reports that Firewalls in between the server and the browser can interfere with Server Sent Events (SSE) used by the Workbench. The will results in the "Loading..." spinner remaining visible and the Workbench failing to materialize.
+
+To disable Server Sent Event, change into jBPM/WildFly home, create a file `ErraiService.properties` under `standalone/deployments/jbpm-console.war/WEB-INF/classes/`, add the following line content
+
+[source,xml]
+----
+errai.bus.enable_sse_support=false
+----
+
+
