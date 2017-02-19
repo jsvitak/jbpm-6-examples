@@ -1,0 +1,9 @@
+
+= Query for details on process instances
+
+Run link:././client/src/main/java/org/jbpm/demo/rest/GetProcessInstance.java[GetProcessInstance.java] will get `http://localhost:8080/jbpm-console/rest/query/runtime/process`, the result looks
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><query-process-instance-result><processInstanceInfoList><process-instance><process-id>org.jbpm.quickstarts.Aun</process-id><id>1</id><state>2</state><parentProcessInstanceId>-1</parentProcessInstanceId></process-instance><variables><name>user</name><string>User1</string><lastModificationDate>2017-02-19T02:05:46.097-05:00</lastModificationDate></variables><variables><name>initiator</name><string>admin</string><lastModificationDate>2017-02-19T01:53:35.313-05:00</lastModificationDate></variables><variables><name>isTelecommunterApproval</name><string>true</string><lastModificationDate>2017-02-19T02:15:57.128-05:00</lastModificationDate></variables><variables><name>isL5L6Approval</name><string>true</string><lastModificationDate>2017-02-19T02:25:01.969-05:00</lastModificationDate></variables></processInstanceInfoList><processInstanceInfoList><process-instance><process-id>org.jbpm.quickstarts.Aun</process-id><id>2</id><state>1</state><parentProcessInstanceId>-1</parentProcessInstanceId></process-instance><variables><name>initiator</name><string>admin</string><lastModificationDate>2017-02-19T03:51:39.511-05:00</lastModificationDate></variables></processInstanceInfoList></query-process-instance-result>
+----

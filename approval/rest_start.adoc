@@ -1,0 +1,11 @@
+
+= Start Process
+
+Run link:././client/src/main/java/org/jbpm/demo/rest/StartProcess.java[StartProcess.java] will doPost to `http://localhost:8080/jbpm-console/rest/runtime/org.jbpm.quickstarts:aun:2.0.1/process/org.jbpm.quickstarts.Aun/start`,
+
+The success result looks
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><process-instance-response><process-id>org.jbpm.quickstarts.Aun</process-id><id>2</id><state>1</state><parentProcessInstanceId>0</parentProcessInstanceId><status>SUCCESS</status><url>/jbpm-console/rest/runtime/org.jbpm.quickstarts:aun:2.0.1/process/org.jbpm.quickstarts.Aun/start</url></process-instance-response>
+----

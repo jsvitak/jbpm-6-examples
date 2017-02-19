@@ -1,0 +1,14 @@
+
+= Telecommunter Approval
+
+* Click `Task`, in task active table, click `release`.
+
+* Once `Task` be release, the status will go into `claim`, click the `cliam` to go into `complete` panel
+
+* In Telecommunter Approval Task complete panle, click to approve to complete Telecommunter Approval Task
+
+image:img/jbpm-approval-Telecommunter-complete.png[Telecommunter complete]
+
+* Once Telecommunter Approval completed, the same way to view Process Model for viewing process status
+
+image:img/jbpm-approval-task-l5l6.png[task L5L6]

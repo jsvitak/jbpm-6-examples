@@ -1,0 +1,20 @@
+= Summary
+
+. link:./Deployment.adoc[Set up Approval Demo]
+.. link:./DOWNLOAD_INSTALL_JBPM.adoc[Download and Installation]
+.. link:./Import.adoc[Import]
+.. link:./Build.adoc[Build & Deploy]
+. link:./Run.adoc[Run from Console]
+.. link:./Run_conosle_start.adoc[Start Process]
+.. link:./Run_conosle_open.adoc[Telecommunter Open]
+.. link:./Run_conosle_telecommunter.adoc[Telecommunter Approval]
+.. link:./Run_conosle_l5l6.adoc[L5/L6 Approval]
+.. link:./Run_conosle_hr.adoc[HR Approval]
+. link:./Rest.adoc[Run from Rest]
+.. link:./rest_start.adoc[Start Process]
+.. link:./rest_process_details.adoc[Get Process Instance]
+.. link:./rest_tasks.adoc[Get Task Summary]
+.. link:./rest_tasks_release.adoc[Task Release]
+.. link:./rest_tasks_cliam.adoc[Task Cliam]
+.. link:./rest_tasks_complete.adoc[Task Complete]
+

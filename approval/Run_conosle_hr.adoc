@@ -1,0 +1,11 @@
+
+= HR Approval
+
+* Click `Task`, in task active table, click `release`.
+
+* Once `Task` be release, the status will go into `claim`, click the `cliam` to go into `complete` panel, click `Complete` button to complete task.
+
+* In the same way as previous to view the process model:
+
+image:img/jbpm-approval-final.png[task-final]
+

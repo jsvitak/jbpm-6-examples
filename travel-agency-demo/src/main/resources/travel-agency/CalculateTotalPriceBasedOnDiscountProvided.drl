@@ -1,0 +1,32 @@
+package org.specialtripsagency
+
+import org.specialtripsagency.BookingObject
+import org.specialtripsagency.Applicant
+import org.specialtripsagency.Flight
+
+rule "CalculateTotalPriceBasedOnDiscountProvided"
+	
+	ruleflow-group "total"
+	salience -10
+	no-loop true
+
+	when
+		tempApplicantObj: Applicant(numberOfTravelers > 0)
+		flight: Flight(ratePerPerson > 0)
+		hotel: Hotel(roomPrice > 0)
+		bookingObject: BookingObject(applicant==tempApplicantObj, availableFlights==flight, availableHotels==hotel)
+	then
+		System.out.println("Running CalculateTotalPriceBasedOnDiscountProvided Rule... Calculating discount");
+                System.out.println("bookingObject.getTotalPrice() value is: " + bookingObject.getTotalPrice());
+		System.out.println("flight.getRatePerPerson() value is: " + flight.getRatePerPerson());
+		System.out.println("flight.getPriceDiscount() value is: " + flight.getPriceDiscount());
+		System.out.println("hotel.getRoomPrice() value is: " + hotel.getRoomPrice());
+		System.out.println("hotel.getPriceDiscount() value is: " + hotel.getPriceDiscount());		
+		modify(bookingObject) {setTotalPrice(
+				bookingObject.getTotalPrice() +
+				((flight.getRatePerPerson() - flight.getPriceDiscount()) * tempApplicantObj.getNumberOfTravelers()) +
+				((hotel.getRoomPrice() - hotel.getPriceDiscount()) * tempApplicantObj.getNumberOfTravelers()))};
+		System.out.println("Calculated Total Price is: [" + bookingObject.getTotalPrice() + "]");
+end
+		
+	

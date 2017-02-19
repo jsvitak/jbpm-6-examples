@@ -1,0 +1,31 @@
+
+= Import Approval Demo
+:toc: manual
+:toc-placement: preamble
+
+Use the following steps to import Approval Demo.
+
+== 1. Login to console
+
+Accessing http://localhost:8080/jbpm-console will log into jBPM console with `admin`/`password1!`.
+
+== 2. Create a Organization Unit
+
+`Authoring` -> `Administration` -> `Organizational Units` -> `Manage Organizational Units`
+
+image:img/jbpm-console-organization-unit.png[Organization Unit]
+
+Click the blue `Add` button, in the popped up window, enter the Name, Default Group ID, Owner, Click the blue `Ok` button to finish add new Organizational Unit
+
+== 3. Import Approval Demo
+
+`Authoring` -> `Administration` -> `Repositories` -> `Clone repository`
+
+image:img/jbpm-approval-clone.png[Clone]
+
+In poped up windown, enter a repository name, select a Organization Unit which create in previous steps, enter `https://github.com/kylinsoong/jbpm-demo-approval.git` to git url section:
+
+image:img/jbpm-approval-clone-git.png[Clone git]
+
+Click the blue `Clone` button to finish the clone.
+

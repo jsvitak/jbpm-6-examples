@@ -1,0 +1,15 @@
+
+= Telecommunter Open
+
+* Click `Task`, in task active table, click `release`.
+
+* Once `Task` be release, the status will go into `claim`, click the `cliam` to go into `complete` panel
+
+* In `complete` enter `User1` and click `complete`
+
+image:img/jbpm-approval-open-complete.png[Open complete]
+
+* Once completed, go into `Process Management` -> `Process Instance`, select the `Aun`, in the right top, click `Ooptions` -> `Process Model`, to view the process status
+
+image:img/jbpm-approval-Telecommunter.png[task Telecommunter]
+

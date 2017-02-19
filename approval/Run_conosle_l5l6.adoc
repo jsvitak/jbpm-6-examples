@@ -1,0 +1,14 @@
+
+= L5/l6 Approval
+
+* Click `Task`, in task active table, click `release`.
+
+* Once `Task` be release, the status will go into `claim`, click the `cliam` to go into `complete` panel
+
+image:img/jbpm-approval-l5l6-complete.png[l5/l6 complete]
+
+* Enable approve to click `Complete` button to complete task.
+
+* In the same way as previous to view the process model:
+
+image:img/jbpm-approval-task-hr.png[task-hr]

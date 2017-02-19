@@ -1,0 +1,9 @@
+
+= Query for details on tasks
+
+Run link:././client/src/main/java/org/jbpm/demo/rest/GetTaskSummary.java[GetTaskSummary.java] will get `http://localhost:8080/jbpm-console/rest/query/runtime/task`, the result looks
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><query-task-result><taskInfoList><processInstanceId>2</processInstanceId><taskSummaries><id>5</id><name>Open</name><subject></subject><description></description><status>Reserved</status><priority>1</priority><skipable>true</skipable><actual-owner>admin</actual-owner><created-by>admin</created-by><created-on>2017-02-19T03:51:39.513-05:00</created-on><activation-time>2017-02-19T03:51:39.513-05:00</activation-time><process-instance-id>2</process-instance-id><process-id>org.jbpm.quickstarts.Aun</process-id><process-session-id>2</process-session-id><deployment-id>org.jbpm.quickstarts:aun:2.0.1</deployment-id><quick-task-summary>false</quick-task-summary><parent-id>-1</parent-id></taskSummaries><variables><name>initiator</name><string>admin</string><lastModificationDate>2017-02-19T03:51:39.511-05:00</lastModificationDate></variables></taskInfoList></query-task-result>
+----

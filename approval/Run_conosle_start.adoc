@@ -1,0 +1,12 @@
+
+= Start Process
+
+* `Process Management` -> `Process Definitions`, in definition table, select the `Aun`, in actions clumn click `Start button`
+
+image:img/jbpm-approval-start.png[Start Process] 
+
+Once the bule button `Submit` br clicked the process will start.
+
+* Once process started, in the right top panel, `Options` -> `Process Model`, a module will pop up, as below, hints, the Open Task is ready
+
+image:img/jbpm-approval-task-open.png[Open Task]

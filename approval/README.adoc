@@ -1,0 +1,6 @@
+= jBPM Approval Demo
+
+Primary purpose of this document is ro set up jBPM Approval Demo and use rest client to start process and claim user task.
+
+image:img/org.jbpm.quickstarts.Aun.png[BPMN Process]
+

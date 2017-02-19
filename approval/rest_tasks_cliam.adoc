@@ -1,0 +1,9 @@
+
+= Task Claim
+
+Run link:././client/src/main/java/org/jbpm/demo/rest/TaskCliam.java[TaskCliam.java] will get `http://localhost:8080/jbpm-console/rest/task/5/claim`, the result looks
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?><response><status>SUCCESS</status><url>/jbpm-console/rest/task/5/claim</url></response>
+----
